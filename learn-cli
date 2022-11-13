@@ -10,16 +10,14 @@ introduction() {
   Welcome to Learn the Commandline.
 
   This program lets you to practice and learn the
-  commandline.\n"
+  commandline.
 
-  printf "
   I will present to you a series of commands and tell you
   what each does. Your job is to use this program to learn
   about them and practice using them. Keep using this
   program over and over until using these commands become
-  second nature.\n"
+  second nature.
 
-  printf "
   The commands we will cover here include:
 
   list files and directories.................. ls
@@ -32,7 +30,17 @@ introduction() {
   display contents of a text file............. cat
   copy a file or directory.................... cp
   move or rename a file or directory.......... mv
-  remove or delete a file or directory........ rm\n"
+  remove or delete a file or directory........ rm
+
+  Instructions: when asked to run a command, type the
+  command and then press the 'Enter' key to run the command.
+  If you make a mistake, this program will let you try
+  again.
+
+  To exit this program before completion, press the key
+  combo 'Ctrl-c' (that is, the control key plus the 'c'
+  key).\n"
+
 }
 
 ###### The 'ls' command ######
@@ -367,6 +375,7 @@ touchsummary() {
   The 'touch' command can be used to create new empty files.
   This command is useful in certain scripting
   scenarios.\n\n"
+
 }
 
 ###### The 'echo' command ######
@@ -526,14 +535,15 @@ cpsummary() {
   sleep 1
 
   printf "
+  Very good! Now you have learned nine commands: 'ls',
+  'pwd', 'mkdir', 'cd', 'rmdir', 'touch', 'echo', 'cat', and
+  'cp'.
+
   Note that the new copy can be used to rename the file
   while keeping the original file in place. There is also a
   command that will rename or move a file. We cover that
-  next.
+  next.\n\n"
 
-  Very good! Now you have learned nine commands: 'ls',
-  'pwd', 'mkdir', 'cd', 'rmdir', 'touch', 'echo', 'cat', and
-  'cp'.\n\n"
 }
 
 ###### The 'mv' command ######
@@ -691,7 +701,11 @@ conclusion() {
   help cd
 
   There are more commands to learn, but once you
-  have practiced these, the rest will come easy.\n"
+  have practiced these, the rest will come easy.
+
+  Run this program over and over again until you get the
+  hang of what the commands do and have acquired a good
+  understanding of them.\n"
 
 }
 
