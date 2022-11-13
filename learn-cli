@@ -16,7 +16,7 @@ introduction() {
   I will present to you a series of commands and tell you
   what each does. Your job is to use this program to learn
   about them and practice using them. Keep using this
-  program over and over until using these commands becomes
+  program over and over until using these commands become
   second nature.\n"
 
   printf "
@@ -121,24 +121,24 @@ mkdirintro() {
   Unlike the 'ls' and the 'pwd' commands above, the 'mkdir'
   command requires an argument or input. The argument is the
   name of the directory that we want to create. For example,
-  if we want to create a directory named 'documents' in our
+  if we want to create a directory named 'homework' in our
   working directory, then we use the 'mkdir' command with
-  the input 'documents' to create that directory.
+  the input 'homework' to create that directory.
 
   Please note that the names of files and directories on
   Linux are case-sensitive. That means that a directory
-  called 'documents' is different than a directory called
-  'Documents' or a directory called 'DOCUMENTS'.
+  called 'homework' is different than a directory called
+  'Homework' or a directory called 'HOMEWORK'.
 
   Try running the 'mkdir' command now to create a directory
-  called documents:
+  called 'homework':
 
-  mkdir documents\n\n"
+  mkdir homework\n\n"
 }
 
 mkdirexec() {
   read -rp "$ " mkdirinput
-  if [ "${mkdirinput}" = "mkdir documents" ] ; then
+  if [ "${mkdirinput}" = "mkdir homework" ] ; then
     echo "${mkdirinput}" | sh
   else
     echo "Try again."
@@ -151,9 +151,9 @@ mkdirsummary() {
   printf "
 
   The 'mkdir' command created a new directory called
-  'documents' in your working directory. If your working
+  'homework' in your working directory. If your working
   directory is your home directory, then the location of the
-  new 'documents' directory is '/home/USER/documents'. We
+  new 'homework' directory is '/home/USER/homework'. We
   can check what directory we are with the 'pwd' command and
   confirm the directory was created with the 'ls' command:
 
@@ -165,7 +165,7 @@ mkdirsummary() {
 
   printf "
   Now try the 'ls' command to confirm that the directory
-  called documents is listed:\n"
+  called 'homework' is listed:\n"
 
   lsexec
   sleep 1
@@ -202,14 +202,14 @@ cdintro() {
   'change directory'.
 
   Try running the 'cd' command now to change into the new
-  'documents' directory:
+  'homework' directory:
 
-  cd documents\n\n"
+  cd homework\n\n"
 }
 
 cdexec() {
   read -rp "$ " cdinput
-  if [ "${cdinput}" = "cd documents" ] ; then
+  if [ "${cdinput}" = "cd homework" ] ; then
     echo "${cdinput}" | sh
   else
     echo "Try again."
@@ -217,14 +217,14 @@ cdexec() {
   fi
 }
 
-cddocuments() {
+cdhomework() {
   printf "
-  The 'cd' command opened your new 'documents' directory. If
+  The 'cd' command opened your new 'homework' directory. If
   you use the 'pwd' command, you will see that that your
-  location has changed to '/home/USER/documents'. Try that
+  location has changed to '/home/USER/homework'. Try that
   now:\n"
 
-  (cd documents && pwdexec)
+  (cd homework && pwdexec)
   sleep 1
 }
 
@@ -275,7 +275,7 @@ rmdirintro() {
   ##### The 'rmdir' command #####
 
   In the prior section, you learned how to create a new
-  directory called 'documents'. To remove that directory, we
+  directory called 'homework'. To remove that directory, we
   use the 'rmdir' command. The 'rmdir' command will only
   remove empty directories. If a directory has other
   directories or files in it, then we will have to use
@@ -284,19 +284,19 @@ rmdirintro() {
   Like the 'mkdir' command, the 'rmdir' command requires an
   argument or input. The argument is the name of the
   directory that we want to remove. For example, if we want
-  to remove the empty directory named 'documents' in our
+  to remove the empty directory named 'homework' in our
   working directory, then we use the 'rmdir' command like
   so:
 
-  rmdir documents
+  rmdir homework 
 
   Try running the 'rmdir' command now to remove the directory
-  called documents:\n\n"
+  called 'homework':\n\n"
 }
 
 rmdirexec() {
   read -rp "$ " rmdirinput
-  if [ "${rmdirinput}" = "rmdir documents" ] ; then
+  if [ "${rmdirinput}" = "rmdir homework" ] ; then
     echo "${rmdirinput}" | sh
   else
     echo "Try again."
@@ -309,11 +309,11 @@ rmdirsummary() {
   printf "
 
   The 'rmdir' command removed the empty directory called
-  'documents' in your working directory. We can check that
+  'homework' in your working directory. We can check that
   with the 'ls' command.
 
   Try the 'ls' command to confirm that the directory called
-  documents is no longer listed:\n\n"
+  'homework' is no longer listed:\n\n"
 
   lsexec
   sleep 1
@@ -719,7 +719,7 @@ main() {
 
   cdintro
   cdexec
-  cddocuments
+  cdhomework
   cdhome
   cdsummary
 
