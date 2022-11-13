@@ -1,2 +1,3 @@
-# learn-the-commandline
-scripts and resources to learn the command line
+# Learn the Commandline
+
+Scripts and resources to learn the command line.
