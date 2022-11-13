@@ -183,7 +183,7 @@ mkdirsummary() {
   spaces or those characters listed on your keyboard above
   your numbers. Names of files and folders should be one
   string of text. If they include multiple words, then
-  separate the words with a dash, an underscore, or using
+  separate the words with a dash, an underscore, or use
   camel casing, like so: my-files, my_files, or myFiles.\n"
 
 }
@@ -256,6 +256,9 @@ cdhome() {
 cdsummary() {
   sleep 1
   printf "
+  Very good! Now you have learned four commands:
+  'ls', 'pwd', 'mkdir', and 'cd'.
+
   The 'cd' command with an argument or input changed your
   working directory (if that directory exists) to the one
   specified in the argument or input. Without an argument or
@@ -263,9 +266,6 @@ cdsummary() {
   home directory, which is /home/USER. We confirmed that
   above with the 'pwd' command.\n\n"
 
-  printf "
-  Very good! Now you have learned four commands:
-  'ls', 'pwd', 'mkdir', and 'cd'.\n\n"
 }
 
 ###### The 'rmdir' command ######
@@ -361,11 +361,12 @@ touchexec() {
 touchsummary() {
   sleep 1
   printf "
-  The 'touch' command can be used to create new empty files.
-  This command is useful in certain scripting scenarios.
+  Very good! Now you have learned six commands: 'ls', 'pwd',
+  'mkdir', 'cd', 'rmdir', and 'touch'.
 
-  Very good! Now you have learned six commands:
-  'ls', 'pwd', 'mkdir', 'cd', 'rmdir', and 'touch'.\n\n"
+  The 'touch' command can be used to create new empty files.
+  This command is useful in certain scripting
+  scenarios.\n\n"
 }
 
 ###### The 'echo' command ######
@@ -397,12 +398,12 @@ echoexec() {
 echoredirectinfo() {
   sleep 1
   printf "
-  The 'echo' command prints to standard output,
-  which is the default. However, we can use 'redirection' to
-  send the input to a file, like the 'data.csv' file we
-  created earlier with the 'touch' command. The redirect
-  command is the angle bracket '>'. To print input to the
-  file 'data.csv', we use the 'echo' like so:
+  The 'echo' command prints to standard output, which is the
+  default. However, we can use 'redirection' to send the
+  input to a file, like the 'data.csv' file we created
+  earlier with the 'touch' command. The redirect command is
+  the angle bracket '>'. To print input to the file
+  'data.csv', we use the 'echo' like so:
 
   echo \"hello world\" > data.csv
 
@@ -422,13 +423,13 @@ echoredirect() {
 echosummary() {
   sleep 1
   printf "
-  The 'echo' command can be used to create text and it is
-  useful in scripts, and it is often used to report the
-  status of some command. Using the redirect command '>',
-  output can be sent to a file.
-
   Very good! Now you have learned seven commands: 'ls',
-  'pwd', 'mkdir', 'cd', 'rmdir', 'touch', and 'echo'.\n\n"
+  'pwd', 'mkdir', 'cd', 'rmdir', 'touch', and 'echo'.
+
+  The 'echo' command can be used to create text. It is
+  useful in scripts to report the status of some command.
+  Using the redirect command '>', output can be sent to a
+  file.\n\n"
 }
 
 ###### The 'cat' command' ######
@@ -580,12 +581,13 @@ mvsummary() {
   sleep 1
 
   printf "
-  Unlike the 'cp' command, the 'mv' command does not keep a
-  copy of the original file.
-
   Very good! Now you have learned ten commands: 'ls', 'pwd',
   'mkdir', 'cd', 'rmdir', 'touch', 'echo', 'cat', 'cp', and
-  'mv'.\n\n"
+  'mv'.
+
+  Unlike the 'cp' command, the 'mv' command does not keep a
+  copy of the original file.\n\n"
+
 }
 
 ###### The 'rm' command ######
@@ -663,19 +665,24 @@ conclusion() {
   the option '-r', which stands for 'recursive'. We use the
   '-r' option to delete directories with content, like so:
 
-  rm -r a_directory\n"
+  rm -r a_directory\n\n"
 
   read -rp "Press enter to continue"
+  clear
 
   printf "
   All of the above commands have a how-to manual. Some of
   these manuals are quite extensive, but they all offer
   instructions in how to use the commands. Except for the
-  'cd' command, to read the manual page for the commands,
+  'cd' command, to read the manual pages for the commands,
   type 'man' and the name of the command. For example, to
   read the manual for the 'cp' command, type:
 
   man cp
+
+  Use the arrow keys on your keyboard to scroll through the
+  manual pages. Press the letter 'q' to exit the manual
+  pages.
 
   The 'cd' command is a special builtin command. That is,
   it's part of the Bash shell. To read the manual for the
@@ -683,7 +690,7 @@ conclusion() {
 
   help cd
 
-  There is more commands to learn, but once you
+  There are more commands to learn, but once you
   have practiced these, the rest will come easy.\n"
 
 }
