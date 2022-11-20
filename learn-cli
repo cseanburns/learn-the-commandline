@@ -7,6 +7,9 @@
 # Sean Burns
 
 introduction() {
+
+  clear
+
   printf "
   Welcome to Learn the Commandline.
 
@@ -61,7 +64,7 @@ lsintro() {
 lsexec() {
   read -rp "$ " lsinput
   if [ "${lsinput}" = "ls" ] ; then
-    echo "${lsinput}" | sh
+    eval "${lsinput}"
   else
     echo "Try again."
     lsexec
@@ -97,7 +100,7 @@ pwdintro() {
 pwdexec() {
   read -rp "$ " pwdinput
   if [ "${pwdinput}" = "pwd" ] ; then
-    echo "${pwdinput}" | sh
+    eval "${pwdinput}"
   else
     echo "Try again."
     pwdexec
@@ -150,7 +153,7 @@ mkdirintro() {
 mkdirexec() {
   read -rp "$ " mkdirinput
   if [ "${mkdirinput}" = "mkdir homework" ] ; then
-    echo "${mkdirinput}" | sh
+    cd "$HOME" && eval "${mkdirinput}"
   else
     echo "Try again."
     mkdirexec
@@ -221,7 +224,7 @@ cdintro() {
 cdexec() {
   read -rp "$ " cdinput
   if [ "${cdinput}" = "cd homework" ] ; then
-    echo "${cdinput}" | sh
+    eval "${cdinput}"
   else
     echo "Try again."
     cdexec
@@ -235,7 +238,7 @@ cdhomework() {
   location has changed to '/home/USER/homework'. Try that
   now:\n"
 
-  (cd homework && pwdexec)
+  (cd "$HOME"/homework && pwdexec)
   sleep 1
 }
 
@@ -251,7 +254,7 @@ cdhome() {
 
   read -rp "$ " cdhome
   if [ "${cdhome}" = "cd" ] ; then
-    echo "${cdhome}" | sh
+    eval "${cdhome}"
   else
     echo "Try again."
     cdhome
@@ -308,7 +311,7 @@ rmdirintro() {
 rmdirexec() {
   read -rp "$ " rmdirinput
   if [ "${rmdirinput}" = "rmdir homework" ] ; then
-    echo "${rmdirinput}" | sh
+    eval "${rmdirinput}"
   else
     echo "Try again."
     rmdirexec
@@ -356,7 +359,7 @@ touchintro() {
 touchexec() {
   read -rp "$ " touchinput
   if [ "${touchinput}" = "touch data.csv" ] ; then
-    echo "${touchinput}" | sh
+    eval "${touchinput}"
   else
     echo "Try again."
     touchexec
@@ -400,7 +403,7 @@ echointro() {
 echoexec() {
   read -rp "$ " echoinput
   if [ "${echoinput}" = 'echo "hello world"' ] ; then
-    echo "${echoinput}" | sh
+    eval "${echoinput}"
   else
     echo "Try again."
     echoexec
@@ -425,7 +428,7 @@ echoredirectinfo() {
 echoredirect() {
   read -rp "$ " echofile
   if [ "${echofile}" = 'echo "hello world" > data.csv' ] ; then
-    echo "${echofile}" | sh
+    eval "${echofile}"
   else
     echo "Try again."
     echoredirect
@@ -472,7 +475,7 @@ catintro() {
 catexec() {
   read -rp "$ " catinput
   if [ "${catinput}" = "cat data.csv" ] ; then
-    echo "${catinput}" | sh
+    eval "${catinput}"
   else
     echo "Try again."
     catexec
@@ -521,7 +524,7 @@ cpintro() {
 cpexec() {
   read -rp "$ " cpinput
   if [ "${cpinput}" = "cp data.csv data.csv.bak" ] ; then
-    echo "${cpinput}" | sh
+    eval "${cpinput}"
   else
     echo "Try again."
     catexec
@@ -577,7 +580,7 @@ mvintro() {
 mvexec() {
   read -rp "$ " mvinput
   if [ "${mvinput}" = "mv data.csv data.old" ] ; then
-    echo "${mvinput}" | sh
+    eval "${mvinput}"
   else
     echo "Try again."
     catexec
@@ -629,7 +632,7 @@ rmintro() {
 rmexec() {
   read -rp "$ " rminput
   if [ "${rminput}" = "rm data.csv.bak data.old" ] ; then
-    echo "${rminput}" | sh
+    eval "${rminput}"
   else
     echo "Try again."
     rmexec
