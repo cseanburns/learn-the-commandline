@@ -1,8 +1,9 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Date: 2022-11-13
 
-# A script to practice basic shell commands
+# A script to practice basic shell commands / utilities
+#
 # Sean Burns
 
 introduction() {
@@ -74,8 +75,10 @@ lssummary() {
   working directory. The working directory is your current
   directory. In a graphical user environment, we would say
   it's the folder that you have opened. When you log in to a
-  Linux system, your working directory is usually your home
-  directory.\n"
+  Linux or Unix system, your working directory is usually
+  your home directory. On many Linux distributions, your
+  home directory is in '/home', but that might differ on
+  macOS (a Unix OS) or ther Unix-like operating systems.\n"
 }
 
 ###### The 'pwd' command ######
