@@ -1,0 +1,338 @@
+#!/usr/bin/env bash
+
+#set -x
+
+# Date: 2022-11-16
+
+# A script to practice navigating and using the Linux
+# filesystem
+#
+# Sean Burns
+
+introduction() {
+
+  clear
+
+  printf "
+  WELCOME TO LEARN THE FILESYSTEM.
+
+  Our main goal with this program is to learn how to
+  navigate and use the Linux filesystem. To accomplish that
+  goal, we will practice with a selection of commands. We
+  will learn how to navigate the Linux filesystem using the
+  'cd' command. We will also learn how to use commands like
+  'mv' to move or rename files or directories, and 'cp' to
+  copy files or directories.
+
+  In this tutorial, I will use the terms 'filesystem' and
+  'directory tree' interchangeably. The term 'filesystem'
+  has other meanings, but both also refer to the layout of
+  the directories and files on a storage device, like a hard
+  drive.
+
+  I should also note that the term 'directories' is
+  equivalent to the term 'folders'. Since we are working
+  with a text user interface, however, it makes more sense
+  to use a metaphor that does not connote an image of a
+  folder in a filing cabinet.\n"
+
+  proceed
+
+  printf "
+  WELCOME TO LEARN THE FILESYSTEM (cont.).
+
+  The commands we will cover here to learn the filesystem
+  include:
+
+  change directory............................ cd
+  list files and directories.................. ls
+  move or rename a file or directory.......... mv
+  remove or delete a file or directory........ rm
+  print name of current/working directory..... pwd
+  create a new directory...................... mkdir
+  remove or delete an empty directory......... rmdir
+
+  We will use those commands to change to different
+  directories ('cd'), list the contents of directories
+  ('ls'), move or rename files or directories to other parts
+  of the filesystem ('mv'), delete file or directories ('rm'
+  or 'rmdir'), locate our current position in the filesystem
+  ('pwd'), and create directories ('mkdir') despite our
+  position in the working directory.
+
+  Instructions: when asked to run a command, type the
+  command and then press the 'Enter' key to run the command.
+  If you make a mistake, this program will let you try
+  again.
+
+  To exit this program before completion, press the key
+  combo, 'Ctrl-c' (that is, the control key plus the 'c'
+  key).\n"
+
+  proceed
+
+}
+
+dirtree() {
+  printf "
+
+  ##### THE DIRECTORY TREE #####
+
+  After years of teaching students how to use Linux, I have
+  come to believe that learning how to navigate and take
+  advantage of the filesystem is one of the more difficult
+  parts of learning Linux.
+
+  The Linux filesystem, also called a directory tree, is
+  unlike the Windows filesystem (think, C:\ drive and like)
+  but like the macOS filesystem. Despite the similarities to
+  macOS, I have found that students using macOS do not have
+  any advantages over Windows users. This is because macOS
+  itself attempts to make its directory tree invisible to
+  its end users. Thus, most Windows or macOS users are on a
+  level playing field when first introduced to the Linux
+  commandline.\n"
+
+  proceed
+
+  printf "
+
+  ##### THE DIRECTORY TREE (cont.) #####
+
+  The Linux directory tree is strictly hierarchical and
+  begins at a single point called the 'root'. The 'root'
+  directory is indicated by a single forward slash, '/'. In
+  the root directory, nineteen directories currently branch
+  off from the root directory, and there are hundreds more
+  that branch off these directories.
+
+  To move around the directory tree, we traverse the tree
+  with the 'cd' ('change directory') command. If we start
+  our position at root '/' and want to go to our personal,
+  home directories, we could start by changing to the home
+  directory '/home', where personal directories are stored,
+  and then change to our personal directory, which is
+  generally named after our username, like '/sean'. Put
+  together, the full path to my personal, home directory,
+  is:
+
+  /home/sean
+
+  Therefore, from the root directory '/', I could use the
+  'cd' command to go home like so:
+
+  cd /home/sean\n"
+
+  proceed
+
+}
+
+absolute_paths_intro() {
+  printf "
+
+  ##### ABSOLUTE PATHS: INTRODUCTION #####
+
+  The prior example '/home/sean' is called the absolute
+  path. The absolute path to a directory always begins with
+  the root '/' directory. Another example of an absolute
+  path is '/var/log' (this is where system logs files are
+  stored). Each time we descend into the tree, we specify
+  each subdirectory under the root '/' directory. In the
+  above example, 'home' is a subdirectory of '/', and 'sean'
+  is a subdirectory of 'home'. The forward slash, when not
+  used for the root '/' directory, indicates a separation
+  between subdirectories.
+
+  The 'pwd' command 'prints the working directory. At the
+  prompt, indicated by a dollar sign '$', type 'pwd' to show
+  where you are now in the directory tree. Then change to
+  the root directory with the 'cd' command. Then use the
+  'pwd' command to print the location of your new working
+  directory:
+
+  pwd
+
+  cd /
+
+  pwd\n"
+
+  (pwdexec && cd / && cdroot && pwdexec)
+  sleep 1
+
+  printf "
+  Congratulations! You changed to the root '/' directory and
+  used the 'pwd' command to show your new location.\n"
+
+  proceed
+  
+}
+
+absolute_paths_summary() {
+  printf "
+
+  ##### ABSOLUTE PATHS: SUMMARY #####
+
+  Remember that absolute paths start with the 'root'
+  directory, which is represented by the forward slash '/'.
+  Another example of an absolute path is '/usr/bin' (where
+  user programs are stored).
+
+  We can use the 'cd' command to change directories by
+  naming their absolute paths, just like we changed to the
+  'root' directory in the prior example by typing 'cd /'.
+  Since our home directory is located at '/home/USER', where
+  'USER' is our username on the system, we can always change
+  to our home directory by typing 'cd /home/USER'. Likewise,
+  if we want to change to the '/var/log/apt' directory, then
+  we type 'cd /var/log/apt'.
+
+  The other commands that I cover here also work with
+  absolute and relative paths (I'll cover relative paths in
+  a moment). For example, to make a directory using the
+  'mkdir' command, we can specify the absolute path with the
+  command. If I want to make a 'homework' directory that
+  resides in my home directory, I can type 'mkdir
+  /home/USER/homework'. We'll go over these commands in a
+  moment.\n"
+
+  proceed
+
+}
+
+relative_paths_intro() {
+  printf "
+
+  ##### RELATIVE PATHS: INTRODUCTION #####
+
+  As stated, absolute paths always begin with the root
+  directory '/' and therefore these paths (or locations) are
+  always fully specified. Relative paths, however, are paths
+  that are always relative to our working directory.
+  Remember, our working directory is our current directory,
+  or the directory we are located in, and we can recall that
+  using the 'pwd' command.
+
+  For example, if I am in my home directory, which is
+  '/home/sean', and I want to navigate to the homework
+  directory that resides in my home directory, which is
+  '/home/sean/homework', I can navigate using the absolute
+  path:
+
+  cd /home/sean/homework
+
+  Or since I'm already in my home directory, I can simply
+  specify the relative path to the homework directory:
+
+  cd homework
+
+  We should therefore know that to change to a directory
+  that resides in our current directory, we only have to
+  specify the name of the subdirectory and not the full,
+  absolute path.\n"
+
+  proceed
+
+  printf "
+
+  ##### RELATIVE PATHS (cont.) #####
+
+  I can specify multiple directories, too. If I have another
+  directory in my homework directory, let's say it has the
+  name 'LIS417', then from my home directory '/home/USER', I
+  can specify the relative path as a nested directory:
+
+  cd homework/LIS417\n"
+
+  proceed
+
+  printf "
+
+  ##### RELATIVE PATHS (cont.) #####
+
+  Relative paths are great because they function as
+  shortcuts to the locations they we want to access or go
+  to. In the prior example, I showed how to traverse to the
+  'homework' directory or to the 'homework/LIS417'
+  directories from our home directory. We can also traverse
+  toward the root directory using a double dot notation
+  '..'.
+
+  As an example, let's say that we are in our
+  'homework/LIS417' directory. The absolute path to that is:
+
+  /home/USER/homework/LIS417
+
+  To change to the directory before that, which is:
+
+  /home/USER/homework
+
+  we can type:
+
+  cd ..
+
+  We can keep repeating that until we get to the root
+  directory '/'. Or, we can string these double dots
+  together to skip multiple directories at once. To get
+  directly to the '/home/USER' directory from our
+  '/home/USER/homework/LIS417' directory, for example, we
+  only need to skip the two separating directories.
+  Therefore, we can use the double dot notation twice, with
+  each double dot separated by a forward slash '/':
+
+  cd ../..
+
+  If we had more directories to skip, then we would add more
+  double dots and forward slashes.\n"
+
+  proceed
+
+}
+
+relative_paths_summary() {
+
+  proceed
+
+}
+
+proceed() {
+  printf "\n"
+  read -rp "Press enter to continue."
+  clear
+}
+
+cdroot() {
+  read -rp "$ " cdrootinput
+  if [ "${cdrootinput}" = "cd /" ] ; then
+    echo "${cdrootinput}" | sh
+  else
+    echo "Try again."
+    cdroot
+  fi
+}
+
+pwdexec() {
+  read -rp "$ " pwdinput
+  if [ "${pwdinput}" = "pwd" ] ; then
+    echo "${pwdinput}" | sh
+  else
+    echo "Try again."
+    pwdexec
+  fi
+}
+
+
+main() {
+  introduction
+
+  dirtree
+
+  absolute_paths_intro
+
+  absolute_paths_summary
+
+  relative_paths_intro
+
+# relative_paths_summary
+}
+
+main
