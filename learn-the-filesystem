@@ -47,6 +47,7 @@ introduction() {
   change directory............................ cd
   list files and directories.................. ls
   move or rename a file or directory.......... mv
+  copy a file or directory.................... cp
   remove or delete a file or directory........ rm
   print name of current/working directory..... pwd
   create a new directory...................... mkdir
@@ -146,7 +147,7 @@ absolute_paths_intro() {
   The 'pwd' command 'prints the working directory. At the
   prompt, indicated by a dollar sign '$', type 'pwd' to show
   where you are now in the directory tree. Then change to
-  the root directory with the 'cd' command. Then use the
+  the root directory with the 'cd /' command. Then use the
   'pwd' command to print the location of your new working
   directory:
 
@@ -154,9 +155,9 @@ absolute_paths_intro() {
 
   cd /
 
-  pwd\n"
+  pwd\n\n"
 
-  (pwdexec && cd / && cdroot && pwdexec)
+  (pwdexec && cdroot && pwdexec)
   sleep 1
 
   printf "
@@ -250,19 +251,19 @@ relative_paths_intro() {
   ##### RELATIVE PATHS (cont.) #####
 
   Relative paths are great because they function as
-  shortcuts to the locations they we want to access or go
+  shortcuts to the locations that we want to access or go
   to. In the prior example, I showed how to traverse to the
   'homework' directory or to the 'homework/LIS417'
   directories from our home directory. We can also traverse
-  toward the root directory using a double dot notation
-  '..'.
+  in reverse, toward the root directory, using a double dot
+  notation '..'.
 
   As an example, let's say that we are in our
   'homework/LIS417' directory. The absolute path to that is:
 
   /home/USER/homework/LIS417
 
-  To change to the directory before that, which is:
+  To change to the parent directory, which is:
 
   /home/USER/homework
 
@@ -270,10 +271,10 @@ relative_paths_intro() {
 
   cd ..
 
-  We can keep repeating that until we get to the root
-  directory '/'. Or, we can string these double dots
-  together to skip multiple directories at once. To get
-  directly to the '/home/USER' directory from our
+  We can repeat that process until we get to the root
+  directory '/'. Or, we can string double dots together to
+  skip multiple directories at once. To get directly to the
+  '/home/USER' directory from our
   '/home/USER/homework/LIS417' directory, for example, we
   only need to skip the two separating directories.
   Therefore, we can use the double dot notation twice, with
@@ -289,10 +290,425 @@ relative_paths_intro() {
 }
 
 relative_paths_summary() {
+  printf "
+
+  ##### RELATIVE PATHS: SUMMARY #####
+
+  Remember that absolute paths start with the 'root'
+  directory, which is represented by the forward slash '/'.
+  An example of an absolute path is '/etc/ufw' (where
+  firewall configurations are stored).
+
+  Relative paths, on the other hand, are always specified
+  relative to our working directory, which we can identify
+  using the 'pwd' command.\n"
+
+  clear
+
+  printf "
+
+  Two other tips:
+
+  1) There are a couple quick ways to go back to our home
+  directory. We can just type 'cd' by itself and press
+  'Enter'. No matter where we are in the filesystem, that
+  will take us back home. Try it now by issuing the
+  following commands, which will print our working
+  directory, change to the '/var/log' directory, and print
+  our working directory again to confirm. Then we issue the
+  'cd' command by itself to take us home, and issue the
+  'pwd' command to confirm:
+
+  pwd
+
+  cd /var/log
+
+  pwd
+
+  cd
+
+  pwd\n\n"
+
+  (pwdexec && cdvarlog && pwdexec && cdhome && pwdexec)
+  sleep 1
+
+  printf "
+  Congratulations! You changed to the '/var/log' directory
+  and then returned home by issuing the 'cd' command by
+  itself.\n"
+
+  proceed
+  clear
+
+  printf "
+
+  ##### RELATIVE PATHS: SUMMARY (cont.) #####
+
+  2) The second way to return home is to use the 'cd'
+  command with the 'tilde' character. Repeat the above but
+  instead of typing 'cd' by itself, type 'cd ~':
+
+  pwd
+
+  cd /var/log
+
+  pwd
+
+  cd ~
+
+  pwd\n\n"
+
+  (pwdexec && cdvarlog && pwdexec && cdtilde && pwdexec)
+  sleep 1
+
+  printf "
+  Congratulations! You changed to the '/var/log' directory
+  and then returned home by issuing the 'cd ~' command. This
+  will be useful when using relative paths.\n"
+
+  proceed
+  clear
+
+}
+
+cdpracticeabs() {
+
+  printf "
+
+  ##### ABSOLUTE PATHS: PRACTICE #####
+
+  Now that you have been introduced to absolute and relative
+  paths, we can practice.
+
+  Using absolute paths, change to the following directories.
+  After changing to each directory, use the 'pwd' command to
+  print the working directory. This is only to confirm that
+  your new directory location. Here are the commands to
+  try:
+
+  cd /etc/systemd
+  pwd
+  cd /home
+  pwd
+  cd /var/log/apt
+  pwd
+  cd
+  pwd\n"
+
+  (cdsystemd && pwdexec && \
+    cdhomedir && pwdexec && \
+    cdlogapt && pwdexec && \
+    cdhome && pwdexec)
+  sleep 1
+
+  printf "
+  Congratulations! You have successfully used the 'cd'
+  command and absolute paths to change directories on the
+  system.\n"  
 
   proceed
 
 }
+
+cdpracticerel() {
+
+  printf "
+
+  ##### RELATIVE PATHS: PRACTICE #####
+
+  Now we can practice using 'cd' with relative paths. We
+  will start at the 'root' directory, and then move to the
+  '/var' directory, the '/var/log' directory, and the
+  '/var/log/apt' directory. Then we will use the double dot
+  notation to return to the root '/' directory. I will show
+  you how to use the 'cd' command to return to the immediate
+  prior directory. Each time we change directories, I'll ask
+  that you use the 'pwd' and sometimes the 'ls' commands to
+  print the working directory and to list the directory's
+  contents. These are not required when you change
+  dircectories, but they help us get a sense of where we are
+  at in the filesystem.
+
+  Ready?\n"
+
+  proceed
+
+  printf "
+
+  ##### RELATIVE PATHS: PRACTICE (cont.) #####
+
+  Try the following commands:
+
+  cd /
+  pwd
+  ls
+
+  cd var
+  pwd
+  ls
+
+  cd log
+  pwd
+  ls
+
+  cd apt
+  pwd 
+
+  cd ..
+  pwd
+
+  cd ..
+  pwd
+
+  cd -
+  pwd
+  ls\n"
+
+  (cdroot && pwdexec && lsexec && \
+    cdvar && pwdexec && lsexec && \
+    cdlog && pwdexec && lsexec && \
+    cdapt && pwdexec && \
+    cdup && pwdexec && \
+    cdup && pwdexec && \
+    cdreturn && lsexec)
+  sleep 1
+
+  printf "
+  Congratulations! You have used relative paths to move
+  around in the system.
+
+  You'll note a new command in the above list: 'cd -'. The
+  dash instructs 'cd' to return to the immediate prior
+  directory.\n"
+
+  proceed
+
+}
+
+mvcpintro() {
+  printf "
+  ###### USING RELATIVE AND ABSOLUTE PATHS WITH COMMANDS #####
+
+  Before we practice, we will start with an introduction to
+  using relative and absolute paths with several commands.
+  In this section, I will demonsrate how to use the 'mv' and
+  'cp' commands with relative and absolute paths. In the
+  following two sections, I will demonstrate how to use the
+  'rm', 'mkdir', and 'rmdir' commands. Once we cover this
+  content, we will practice using these commands.\n"
+
+  proceed
+
+  printf "
+  ###### USING THE 'mv' and 'cp' COMMANDS #####
+
+  Now we will use the move 'mv' command to move and/or
+  rename files and directories. As a reminder from the
+  'learn-cli' program, to rename a file, like 'paper.txt' to
+  'paper.txt.bak', the 'mv' command is pretty
+  straightforward:
+
+  mv paper.txt paper.txt.bak
+
+  The above command simply renames the file 'paper.txt' to
+  'paper.txt.bak'. The same process works with directories,
+  which in Linux are simply special types of files. To
+  rename a directory named 'documents' to 'Documents' (all
+  file and directory names on Linux are case-sensitive), the
+  'mv command is again straightforward:
+
+  mv documents Documents
+
+  Like the example with 'paper.txt', the above command
+  simply renames the directory 'documents' to 'Documents'.
+  If the directory had any content, like files or other
+  directories, the content will remain unchanged.
+
+  The 'cp' command works the same way. Since files and
+  directories on Linux are case-sensitive, repeating the
+  follwoing command will create a copy of the 'documents'
+  directory as 'Documents', and both directories can
+  co-exist in the same base directory. Their contents will
+  also be copied over. Thus, to copy 'documents' to
+  'Documents', the 'cp' command is:
+
+  cp documents Documents\n"
+
+  proceed
+
+  printf "
+  ###### USING THE 'mv' and 'cp' COMMANDS (cont.) #####
+
+  Things change a bit when moving a file or directory to
+  another directory. Here we have the chance to not only
+  move a file or directory, we can also rename it or not. To
+  move the file 'paper.txt' from the home directory
+  '/home/USER' to the 'Documents' directory in the home
+  directory without changing its name, the 'mv' command is:
+
+  mv paper.txt Documents/
+
+  Note that if we are only moving the file, then we don't
+  have to specify a new name. We only have to specify the
+  new location.
+
+  However, to move and rename it to 'paper.txt.bak', then we
+  need to specify the new file name after the target
+  directory's name. The 'mv' command is:
+
+  mv paper.txt Documents/paper.txt.bak
+
+  Thus, the above command will move the file 'paper.txt' to
+  the 'Documents' directory and rename it to
+  'paper.txt.bak'.\n"
+
+  proceed
+
+  printf "
+  ###### USING THE 'mv' and 'cp' COMMANDS (cont.) #####
+
+  The copy 'cp' command works the exact same way as the 'mv'
+  command but will keep the original file or directory in
+  place. Therefore, to copy 'paper.txt' to the Documents
+  directory from the home directory, the 'cp' command is:
+
+  cp paper.txt Documents/
+
+  This will keep a copy of the 'paper.txt' file in the home
+  directory and put another copy in the 'Documents'
+  directory.
+
+  We can also copy and rename at the same time and using the
+  same kind of command as we did with 'mv'. The following
+  command will copy 'paper.txt' from the home directory to
+  the 'Documents/' directory and also rename it. The
+  original 'paper.txt' file will stay in the home directory:
+
+  cp paper.txt Documents/paper.txt.bak\n"
+
+  proceed
+
+  printf "
+  ###### USING THE 'mv' and 'cp' COMMANDS (cont.) #####
+   
+  These commands can work in reverse. If my home directory
+  is my working directory, and I want to move
+  'Documents/paper.txt.bak' to my working directory, I can
+  use the following 'mv' command:
+
+  mv Documents/paper.txt.bak paper.txt
+
+  Or I can use the tilde '~' to signify my home directory.
+  Remember that we used the tilde with the 'cd' command to
+  take us home. That is, 'cd ~' will change our directory to
+  '/home/USER', where USER is the name of your home
+  directory. The tilde is always shorthand for home.
+  Therefore, this is the same command as above:
+
+  mv Documents/paper.txt.bak ~/paper.txt
+
+  Thus, the above command will move the file 'paper.txt.bak'
+  from the 'Documents/' directory to the home directory.
+
+  You can use the 'cp' command in the same way. To repeat
+  the last command but to copy instead of move, then the
+  'cp' command is:
+
+  cp Documents/paper.txt.bak ~/paper.txt
+
+  Thus, the above command will copy 'paper.txt.bak' from the
+  'Documents' directory to the home directory.\n"
+
+  proceed
+
+}
+
+rmintro() {
+  printf "
+  ##### USING THE 'rm' COMMAND #####
+
+  Using the remove 'rm' command works similarily as the 'mv'
+  and 'cp' commands except that we only specify one file or
+  directory, and this would be the file or directory to
+  delete. Remember that you should consider the 'rm' command
+  as a permanent delete. Therefore, to delete
+  'paper.txt.bak' from the 'Documents/' directory in our
+  home directory, the 'rm' command is:
+
+  rm Documents/paper.txt.bak
+
+  The above command would not delete the 'Documents'
+  directory. It would only delete 'paper.txt.bak' in the
+  'Documents' directory.
+
+  Let's say that we have a directory in the 'Documents/'
+  directory named 'notes' such that its full path is
+  '/home/USER/Documents/notes'. To delete that from the home
+  directory, we need to add the '-r' option, which stands
+  for 'recursive'. The 'rm' command to delete the 'notes'
+  directory in the 'Documents' directory is:
+
+  rm -r Documents/notes
+
+  To delete it using its absolute path, the 'rm' command
+  would be:
+
+  rm -r /home/USER/Documents/notes\n\n"
+
+  proceed
+
+}
+
+dirintro() {
+  printf "
+  ##### USING THE 'mkdir' and 'rmdir' COMMANDS #####
+
+  Recall that the 'mkdir' command 'makes a directory' and
+  the 'rmdir' command 'removes an empty directory'.
+
+  The 'rmdir' command can only delete emtpy directories.
+  Therefore, it's safer to use this command when deleting
+  directories since it will fail if the directory you're
+  using it on has content and you forgot that it has
+  content.
+
+  You can use either absolute or relative paths to create or
+  remove directories. Let's say you want to make a new
+  directory called 'homework' in your home's 'Documents'
+  directory, then the 'mkdir' command is:
+
+  mkdir Documents/homework
+
+  We can likewise delete that empty 'homework' directory
+  with the 'rmdir'. The 'rmdir' command for that would be:
+
+  rmdir Documents/homework
+
+  Alternatively, we can specify the absolute path, and this
+  works for either 'mkdir' or 'rmdir'. Here is the 'rmdir'
+  command to remove the above 'homework' directory:
+
+  rmdir /home/USER/Documents/homework
+
+  The above command will only delete the 'homework'
+  directory and not any of the other directories listed in
+  the absolute path. The same path can be used to make a new
+  directory. Both of the following 'mkdir' commands are
+  equivalent:
+
+  mkdir /home/USER/Documents/homework
+  mkdir ~/Documents/homework
+
+  This concludes the introduction to the 'mv', 'cp', 'rm',
+  'mkdir', and 'rmdir' commands. We will now practice.\n"
+
+  proceed
+
+}
+
+#practicecommands() {
+#
+#}
 
 proceed() {
   printf "\n"
@@ -300,39 +716,169 @@ proceed() {
   clear
 }
 
+lsexec() {
+  read -rp "$ " lsinput
+  if [ "${lsinput}" = "ls" ] ; then
+    eval "${lsinput}"
+  else
+    echo "Try again."
+    lsexec
+  fi
+}
+
+cdvar() {
+  read -rp "$ " cdvarinput
+  if [ "${cdvarinput}" = "cd var" ] ; then
+    eval "${cdvarinput}"
+  else
+    echo "Try again."
+    cdvar
+  fi
+}
+
+cdlog() {
+  read -rp "$ " cdloginput
+  if [ "${cdloginput}" = "cd log" ] ; then
+    eval "${cdloginput}"
+  else
+    echo "Try again."
+    cdlog
+  fi
+}
+
+cdapt() {
+  read -rp "$ " cdaptinput
+  if [ "${cdaptinput}" = "cd apt" ] ; then
+    eval "${cdaptinput}"
+  else
+    echo "Try again."
+    cdapt
+  fi
+}
+
+cdup() {
+  read -rp "$ " cdupinput
+  if [ "${cdupinput}" = "cd .." ] ; then
+    eval "${cdupinput}"
+  else
+    echo "Try again."
+    cdup
+  fi
+}
+
+cdreturn() {
+  read -rp "$ " cdreturninput
+  if [ "${cdreturninput}" = "cd -" ] ; then
+    eval "${cdreturninput}"
+  else
+    echo "Try again."
+    cdreturn
+  fi
+}
+
+cdsystemd() {
+  read -rp "$ " cdsystemdinput
+  if [ "${cdsystemdinput}" = "cd /etc/systemd" ] ; then
+    eval "${cdsystemdinput}"
+  else
+    echo "Try again."
+    cdsystemd
+  fi
+}
+
+cdhomedir() {
+  read -rp "$ " cdhomedirinput
+  if [ "${cdhomedirinput}" = "cd /home" ] ; then
+    eval "${cdhomedirinput}"
+  else
+    echo "Try again."
+    cdhomedir
+  fi
+}
+
+cdlogapt() {
+  read -rp "$ " cdlogaptinput
+  if [ "${cdlogaptinput}" = "cd /var/log/apt" ] ; then
+    eval "${cdlogaptinput}"
+  else
+    echo "Try again."
+    cdlogapt
+  fi
+}
+
+cdhome() {
+  read -rp "$ " cdhomeinput
+  if [ "${cdhomeinput}" = "cd" ] ; then
+    eval "${cdhomeinput}"
+  else
+    echo "Try again."
+    cdhome
+  fi
+}
+
 cdroot() {
   read -rp "$ " cdrootinput
   if [ "${cdrootinput}" = "cd /" ] ; then
-    echo "${cdrootinput}" | sh
+    eval "${cdrootinput}"
   else
     echo "Try again."
     cdroot
   fi
 }
 
+cdvarlog() {
+  read -rp "$ " cdvarloginput
+  if [ "${cdvarloginput}" = "cd /var/log" ] ; then
+    eval "${cdvarloginput}"
+  else
+    echo "Try again."
+    cdvarlog
+  fi
+}
+
+
+cdtilde() {
+  read -rp "$ " cdtildeinput
+  if [ "${cdtildeinput}" = "cd ~" ] ; then
+    eval "${cdtildeinput}"
+  else
+    echo "Try again."
+    cdtilde
+  fi
+}
+
 pwdexec() {
   read -rp "$ " pwdinput
   if [ "${pwdinput}" = "pwd" ] ; then
-    echo "${pwdinput}" | sh
+    eval "${pwdinput}"
   else
     echo "Try again."
     pwdexec
   fi
 }
 
-
 main() {
-  introduction
+#  introduction
+#
+#  dirtree
+#
+#  absolute_paths_intro
+#
+#  absolute_paths_summary
+#
+#  relative_paths_intro
+#
+#  relative_paths_summary
+#
+#  cdpracticeabs
+#
+#  cdpracticerel
+#
+  mvcpintro
 
-  dirtree
+  rmintro
 
-  absolute_paths_intro
-
-  absolute_paths_summary
-
-  relative_paths_intro
-
-# relative_paths_summary
+  dirintro
 }
 
 main
