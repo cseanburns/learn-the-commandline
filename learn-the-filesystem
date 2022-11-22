@@ -461,7 +461,6 @@ cdpracticerel() {
   pwd
 
   cd -
-  pwd
   ls\n"
 
   (cdroot && pwdexec && lsexec && \
@@ -489,13 +488,14 @@ mvcpintro() {
   printf "
   ###### USING RELATIVE AND ABSOLUTE PATHS WITH COMMANDS #####
 
-  Before we practice, we will start with an introduction to
-  using relative and absolute paths with several commands.
-  In this section, I will demonsrate how to use the 'mv' and
-  'cp' commands with relative and absolute paths. In the
-  following two sections, I will demonstrate how to use the
-  'rm', 'mkdir', and 'rmdir' commands. Once we cover this
-  content, we will practice using these commands.\n"
+  Before we continue to practice, we will start with an
+  introduction to using relative and absolute paths with
+  several commands. In this section, I will demonsrate how
+  to use the 'mv' and 'cp' commands with relative and
+  absolute paths. In the following two sections, I will
+  demonstrate how to use the 'rm', 'mkdir', and 'rmdir'
+  commands. Once we cover this content, we will practice
+  using these commands.\n"
 
   proceed
 
@@ -700,15 +700,94 @@ dirintro() {
   mkdir ~/Documents/homework
 
   This concludes the introduction to the 'mv', 'cp', 'rm',
-  'mkdir', and 'rmdir' commands. We will now practice.\n"
+  'mkdir', and 'rmdir' commands. We will now practice using
+  them.\n"
 
   proceed
 
 }
 
-#practicecommands() {
-#
-#}
+mvpractice() {
+  printf "
+  ##### PRACTICING RELATIVE AND ABSOLUTE PATHS #####
+
+  Let's get started. We will practice the 'mv', 'cp', 'rm',
+  'mkdir', and the 'rmdir' commands with absolute and
+  relative paths.\n"
+
+  proceed
+
+  touch "$HOME"/paper1.txt && mkdir "$HOME"/homework
+
+  printf "
+
+  ##### PRACTICING RELATIVE AND ABSOLUTE PATHS (cont.) #####
+
+  I have taken the liberty of creating an empty text file in
+  your home directory and named it 'paper1.txt' and an empty
+  directory in your home directory named 'homework'.
+
+  First, see for yourself that the file and directory now
+  exist. Which command do you use to list the contents of
+  your working directory? Type that command now:\n\n"
+
+  lshome
+
+  proceed
+
+  printf "
+  Now that you have confirmed that the file and directory
+  exist, your first task is to move 'mv' the 'paper1.txt'
+  file to your 'homework' directory using the absolute path,
+  like so:
+
+  mv /home/%s/paper1.txt /home/%s/homework/\n\n" "$USER" "$USER"
+
+  mvabs
+
+  printf "
+  Congratulations! You moved the file 'paper.txt' to the
+  'homework' directory in your home directory. Run the
+  command to see that 'paper1.txt' is no longer in your
+  home directory:\n\n"
+
+  lshome
+  sleep 1
+
+  printf "
+  Now run 'ls homework' to confirm that 'paper1.txt' is in
+  your new 'homework' directory:\n\n"
+
+  lshomework
+  sleep 1
+
+  printf "
+  Great!!\n"
+
+  proceed
+
+  printf "
+
+  ##### PRACTICING RELATIVE AND ABSOLUTE PATHS (cont.) #####
+
+  Let's move the file 'paper1.txt' back to your home
+  directory using relative paths. The command is:
+
+  mv homework/paper1.txt ~/paper1.txt\n\n"
+
+  mvrel
+
+  printf "
+  Congratulations! You moved the file 'paper.txt' from the
+  'homework' directory back to your home directory. Run the
+  command to see that 'paper1.txt' is back in your home
+  directory:\n\n"
+
+  lshome
+
+  proceed
+
+}
 
 proceed() {
   printf "\n"
@@ -723,6 +802,26 @@ lsexec() {
   else
     echo "Try again."
     lsexec
+  fi
+}
+
+lshome() {
+  read -rp "$ " lshomeinput
+  if [ "${lshomeinput}" = "ls" ] ; then
+    eval "${lshomeinput} $HOME"
+  else
+    echo "Try again."
+    lshome
+  fi
+}
+
+lshomework() {
+  read -rp "$ " lshomeworkinput
+  if [ "${lshomeworkinput}" = "ls homework" ] ; then
+    ls "$HOME"/homework
+  else
+    echo "Try again."
+    lshomework
   fi
 }
 
@@ -836,7 +935,6 @@ cdvarlog() {
   fi
 }
 
-
 cdtilde() {
   read -rp "$ " cdtildeinput
   if [ "${cdtildeinput}" = "cd ~" ] ; then
@@ -857,6 +955,26 @@ pwdexec() {
   fi
 }
 
+mvabs() {
+  read -rp "$ " mvabsinput
+  if [ "${mvabsinput}" = "mv /home/$USER/paper1.txt /home/$USER/homework/" ] ; then
+    eval "${mvabsinput}"
+  else
+    echo "Try again."
+    mvabs
+  fi
+}
+
+mvrel() {
+  read -rp "$ " mvrelinput
+  if [ "${mvrelinput}" = "mv homework/paper1.txt ~/paper1.txt" ] ; then
+    mv "$HOME"/homework/paper1.txt "$HOME"/paper1.txt
+  else
+    echo "Try again."
+    mvrel
+  fi
+}
+
 main() {
 #  introduction
 #
@@ -867,18 +985,20 @@ main() {
 #  absolute_paths_summary
 #
 #  relative_paths_intro
-#
+# 
 #  relative_paths_summary
-#
+# 
 #  cdpracticeabs
 #
 #  cdpracticerel
+# 
+#  mvcpintro
 #
-  mvcpintro
+#  rmintro
+#
+#  dirintro
 
-  rmintro
-
-  dirintro
+  mvpractice 
 }
 
 main
