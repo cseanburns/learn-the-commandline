@@ -426,7 +426,7 @@ cdpracticerel() {
   that you use the 'pwd' and sometimes the 'ls' commands to
   print the working directory and to list the directory's
   contents. These are not required when you change
-  dircectories, but they help us get a sense of where we are
+  directories, but they help us get a sense of where we are
   at in the filesystem.
 
   Ready?\n"
@@ -490,7 +490,7 @@ mvcpintro() {
 
   Before we continue to practice, we will start with an
   introduction to using relative and absolute paths with
-  several commands. In this section, I will demonsrate how
+  several commands. In this section, I will demonstrate how
   to use the 'mv' and 'cp' commands with relative and
   absolute paths. In the following two sections, I will
   demonstrate how to use the 'rm', 'mkdir', and 'rmdir'
@@ -526,7 +526,7 @@ mvcpintro() {
 
   The 'cp' command works the same way. Since files and
   directories on Linux are case-sensitive, repeating the
-  follwoing command will create a copy of the 'documents'
+  following command will create a copy of the 'documents'
   directory as 'Documents', and both directories can
   co-exist in the same base directory. Their contents will
   also be copied over. Thus, to copy 'documents' to
@@ -627,7 +627,7 @@ rmintro() {
   printf "
   ##### USING THE 'rm' COMMAND #####
 
-  Using the remove 'rm' command works similarily as the 'mv'
+  Using the remove 'rm' command works similarly to the 'mv'
   and 'cp' commands except that we only specify one file or
   directory, and this would be the file or directory to
   delete. Remember that you should consider the 'rm' command
@@ -666,7 +666,7 @@ dirintro() {
   Recall that the 'mkdir' command 'makes a directory' and
   the 'rmdir' command 'removes an empty directory'.
 
-  The 'rmdir' command can only delete emtpy directories.
+  The 'rmdir' command can only delete empty directories.
   Therefore, it's safer to use this command when deleting
   directories since it will fail if the directory you're
   using it on has content and you forgot that it has
@@ -733,13 +733,16 @@ mvpractice() {
 
   lshome
 
+  printf "
+  Nice job!\n\n"
+
   proceed
 
   printf "
-  Now that you have confirmed that the file and directory
-  exist, your first task is to move 'mv' the 'paper1.txt'
-  file to your 'homework' directory using the absolute path,
-  like so:
+  Nice job! Now that you have confirmed that the file and
+  directory exist, your first task is to move 'mv' the
+  'paper1.txt' file to your 'homework' directory using the
+  absolute path, like so:
 
   mv /home/%s/paper1.txt /home/%s/homework/\n\n" "$USER" "$USER"
 
@@ -755,8 +758,9 @@ mvpractice() {
   sleep 1
 
   printf "
-  Now run 'ls homework' to confirm that 'paper1.txt' is in
-  your new 'homework' directory:\n\n"
+  Now run 'ls homework', which uses the 'ls' command and the
+  relative path to the homework directory, to confirm that
+  'paper1.txt' is in your new 'homework' directory:\n\n"
 
   lshomework
   sleep 1
@@ -778,14 +782,237 @@ mvpractice() {
   mvrel
 
   printf "
-  Congratulations! You moved the file 'paper.txt' from the
+  Congratulations! You moved the file 'paper1.txt' from the
   'homework' directory back to your home directory. Run the
   command to see that 'paper1.txt' is back in your home
   directory:\n\n"
 
   lshome
 
+  printf "
+  Now let's remove that 'paper1.txt' file since we don't
+  need it anymore. Use the 'rm' command like so:
+
+  rm paper1.txt\n\n"
+
+  rmpaper1
+
+  printf "
+  Great job!\n\n"
+
   proceed
+
+}
+
+dirpractice() {
+  printf "
+  ##### PRACTICING PATHS WITH 'mkdir' AND 'rmdir' #####
+
+  Let's make and remove some directories with the 'mkdir'
+  and 'rmdir' commands using relative paths only.
+
+  First, now that we removed the 'paper1.txt' file from the
+  'homework' directory in your user directory, we can use
+  the 'rmdir' command to delete the 'homework' directory.
+  Remember that 'rmdir' only deletes empty directories. From
+  our home directory, the relative path to the 'homework'
+  directory is just 'homework'. So to remove that directory,
+  we issue the following command:
+
+  rmdir homework
+
+  Give it a try:\n\n"
+
+  rmhomework
+
+  proceed
+
+  printf "
+  ##### PRACTICING PATHS WITH 'mkdir' AND 'rmdir' (cont.) #####
+
+  Great job! Now let's create a new directory in our home
+  directory. Let's call it 'test_dir'. Remember that
+  directories and files should not contain any spaces, nor
+  should they contain any special characters other than a
+  dash or an underscore. Since we are already in our home
+  directory, we issue the following command to create the
+  'test_dir' directory:
+
+  mkdir test_dir
+
+  Give it a try:\n\n"
+
+  mktestdir
+
+  proceed
+
+  printf "
+  ##### PRACTICING PATHS WITH 'mkdir' AND 'rmdir' (cont.) #####
+
+  Great job! Confirm that the directory exists in your home
+  directory by using the 'ls' command. Give it a try:\n\n"
+
+  lshome
+
+  proceed
+
+  printf "
+  ##### PRACTICING PATHS WITH 'mkdir' AND 'rmdir' (cont.) #####
+
+  Suppose we want to create a directory in our new
+  'test_dir' directory. We'll call it 'test_sub_dir'. To do
+  that, we simply specify the 'test_dir' path followed by
+  the name of the new directory, like so:
+
+  mkdir test_dir/test_sub_dir
+
+  Give it a try:\n\n"
+
+  mktestsubdir
+
+  proceed
+
+  printf "
+  ##### PRACTICING PATHS WITH 'mkdir' AND 'rmdir' (cont.) #####
+
+  Nice! Let's confirm that the 'test_sub_dir' directory
+  exists in the 'test_dir' directory. Here we'll use the
+  'ls' command and specify the relative path to the
+  'test_dir' directory, like so:
+
+  ls test_dir
+
+  Give it a try:\n\n"
+
+  lstestsubdir
+
+  sleep 1
+
+  printf "
+  Wonderful! Only the 'test_sub_dir' directory was listed
+  since that's the only thing in the 'test_dir'
+  directory.\n"
+
+  proceed
+
+  printf "
+  ##### PRACTICING PATHS WITH 'mkdir' AND 'rmdir' (cont.) #####
+
+  Now let's delete these new directories. We can delete them
+  all at once with the 'rm -r test_dir' command, but let's
+  use 'rmdir' instead, just to practice.
+
+  The trick is that since 'rmdir' only deletes empty
+  directories, we can't delete the 'test_dir' directory
+  until we delete the 'test_sub_dir' directory. So let's
+  delete that one first. The command to do so is:
+
+  rmdir test_dir/test_sub_dir
+
+  Give it a try:\n\n"
+
+  rmtestsubdir
+
+  proceed
+
+  printf "
+  ##### PRACTICING PATHS WITH 'mkdir' AND 'rmdir' (cont.) #####
+
+  Great! Now that 'test_sub_dir' has been deleted, the
+  'test_dir' directory is empty. We can now use the 'rmdir'
+  command to delete that. To do so, issue the following
+  command:
+
+  rmdir test_dir\n\n"
+
+  rmtestdir
+
+  proceed
+
+  printf "
+  ##### PRACTICING PATHS WITH 'mkdir' AND 'rmdir' (cont.) #####
+
+  Nice job! Now test that the directory has been removed
+  from your home directory with the 'ls' command. Give it a
+  try:\n"
+
+  lshome
+
+  printf "
+  Well done!\n\n"
+}
+
+conclusion() {
+  printf "
+  ##### CONCLUSION TO LEARN THE FILESYSTEM #####
+
+  In this tutorial, we learned how to use several commands
+  with absolute and relative paths. As a reminder, an
+  absolute path begins with the root '/' directory and
+  specifies all subdirectories under '/'. Therefore, the
+  absolute path to your home directory is:\n"
+
+  printf "
+  %s\n" "$HOME"
+
+  printf "
+  Note that the path to your home directory starts with a
+  '/' and ends with the name of your home directory and all
+  directories in between, in this case only '/home' is
+  listed since that is the only directory between root '/'
+  and your home directory . The absolute path is therefore
+  fully specified.\n"
+
+  proceed
+
+  printf "
+  ##### CONCLUSION TO LEARN THE FILESYSTEM (cont.) #####
+
+  We specify relative paths from some other position. Most of
+  the time, that other position is our current working
+  directory, which we can find with the 'pwd' command. If we
+  are interested in specifying a directory in our home
+  directory called 'homework', then we just specify the path
+  'homework'. For example, to change to the homework
+  directory from our home directory, we just type:
+
+  cd homework\n"
+
+  proceed
+
+  printf "
+  ##### CONCLUSION TO LEARN THE FILESYSTEM (cont.) #####
+
+  Another example: there are hundreds of directories on the
+  system. In the root '/' directory, there is a directory
+  called 'etc'. To change to that directory from the 'root'
+  directory, we just type:
+
+  cd etc
+
+  Furthermore, in the 'etc' directory, there is a directory
+  called 'apt'. To change to that directory FROM the 'etc'
+  directory, we just type:
+
+  cd apt
+
+  Alternatively, we could specify the absolute path 
+  wherever we are in the file system:
+
+  cd /etc/apt\n"
+
+  proceed
+
+  printf "
+  ##### CONCLUSION TO LEARN THE FILESYSTEM (cont.) #####
+
+  The key to getting the hang of absolute and relative paths
+  is to practice using them. Run this tutorial over and over
+  again, and then periodically to refresh your memory. Then
+  practice using the commands we've covered here to
+  practice. Don't worry about messing up and think of this
+  as play. If you follow these instructions, you'll have
+  this all down in no time.\n\n"
 
 }
 
@@ -975,30 +1202,104 @@ mvrel() {
   fi
 }
 
-main() {
-#  introduction
-#
-#  dirtree
-#
-#  absolute_paths_intro
-#
-#  absolute_paths_summary
-#
-#  relative_paths_intro
-# 
-#  relative_paths_summary
-# 
-#  cdpracticeabs
-#
-#  cdpracticerel
-# 
-#  mvcpintro
-#
-#  rmintro
-#
-#  dirintro
+rmhomework() {
+  read -rp "$ " rmhomeworkinput
+  if [ "${rmhomeworkinput}" = "rmdir homework" ] ; then
+    rmdir "$HOME"/homework
+  else
+    echo "Try again."
+    rmhomework
+  fi
+}
 
+rmpaper1() {
+  read -rp "$ " rmpaper1input
+  if [ "${rmpaper1input}" = "rm paper1.txt" ] ; then
+    rm "$HOME"/paper1.txt
+  else
+    echo "Try again."
+    rmpaper1
+  fi
+}
+
+mktestdir() {
+  read -rp "$ " mktestdirinput
+  if [ "${mktestdirinput}" = "mkdir test_dir" ] ; then
+    mkdir "$HOME"/test_dir
+  else
+    echo "Try again."
+    mktestdir
+  fi
+}
+
+mktestsubdir() {
+  read -rp "$ " mktestsubdirinput
+  if [ "${mktestsubdirinput}" = "mkdir test_dir/test_sub_dir" ] ; then
+    mkdir "$HOME"/test_dir/test_sub_dir
+  else
+    echo "Try again."
+    mktestsubdir
+  fi
+}
+
+lstestsubdir() {
+  read -rp "$ " lstestsubdirinput
+  if [ "${lstestsubdirinput}" = "ls test_dir" ] ; then
+    ls "$HOME"/test_dir
+  else
+    echo "Try again."
+    lstestsubdir
+  fi
+}
+
+rmtestsubdir() {
+  read -rp "$ " rmtestsubdirinput
+  if [ "${rmtestsubdirinput}" = "rmdir test_dir/test_sub_dir" ] ; then
+    rmdir "$HOME"/test_dir/test_sub_dir
+  else
+    echo "Try again."
+    rmtestsubdir
+  fi
+}
+
+rmtestdir() {
+  read -rp "$ " rmtestdirinput
+  if [ "${rmtestdirinput}" = "rmdir test_dir" ] ; then
+    rmdir "$HOME"/test_dir
+  else
+    echo "Try again."
+    rmtestdir
+  fi
+}
+
+main() {
+  introduction
+ 
+  dirtree
+ 
+  absolute_paths_intro
+ 
+  absolute_paths_summary
+ 
+  relative_paths_intro
+
+  relative_paths_summary
+
+  cdpracticeabs
+ 
+  cdpracticerel
+
+  mvcpintro
+ 
+  rmintro
+ 
+  dirintro
+ 
   mvpractice 
+ 
+  dirpractice
+ 
+  conclusion
 }
 
 main
