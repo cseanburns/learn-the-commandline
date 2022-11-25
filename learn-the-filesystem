@@ -26,15 +26,15 @@ introduction() {
 
   In this tutorial, I will use the terms 'filesystem' and
   'directory tree' interchangeably. The term 'filesystem'
-  has other meanings, but both also refer to the layout of
-  the directories and files on a storage device, like a hard
-  drive.
+  has other meanings, but both filesytem and directory tree
+  also refer to the layout of the directories and files on a
+  storage device, like a hard drive.
 
   I should also note that the term 'directories' is
   equivalent to the term 'folders'. Since we are working
-  with a text user interface, however, it makes more sense
-  to use a metaphor that does not connote an image of a
-  folder in a filing cabinet.\n"
+  with a text user interface, it makes more sense to use a
+  metaphor that does not connote an image of a folder in a
+  filing cabinet.\n"
 
   proceed
 
@@ -111,8 +111,10 @@ dirtree() {
   with the 'cd' ('change directory') command. If we start
   our position at root '/' and want to go to our personal,
   home directories, we could start by changing to the home
-  directory '/home', where personal directories are stored,
-  and then change to our personal directory, which is
+  directory '/home'. This is where personal directories are
+  stored (if we created accounts for other users, their
+  personal directories would also be stored in '/home').
+  There we can change to our personal directory, which is
   generally named after our username, like '/sean'. Put
   together, the full path to my personal, home directory,
   is:
@@ -382,17 +384,23 @@ cdpracticeabs() {
 
   Using absolute paths, change to the following directories.
   After changing to each directory, use the 'pwd' command to
-  print the working directory. This is only to confirm that
-  your new directory location. Here are the commands to
-  try:
+  print the working directory. This is only to confirm your
+  new directory location. Here are the commands to try:
 
   cd /etc/systemd
+
   pwd
+
   cd /home
+
   pwd
+
   cd /var/log/apt
+
   pwd
+
   cd
+
   pwd\n"
 
   (cdsystemd && pwdexec && \
@@ -420,14 +428,15 @@ cdpracticerel() {
   will start at the 'root' directory, and then move to the
   '/var' directory, the '/var/log' directory, and the
   '/var/log/apt' directory. Then we will use the double dot
-  notation to return to the root '/' directory. I will show
-  you how to use the 'cd' command to return to the immediate
-  prior directory. Each time we change directories, I'll ask
-  that you use the 'pwd' and sometimes the 'ls' commands to
-  print the working directory and to list the directory's
-  contents. These are not required when you change
-  directories, but they help us get a sense of where we are
-  at in the filesystem.
+  notation to return to the root '/' directory.
+
+  I will also show you how to use the 'cd' command to return
+  to the immediate prior directory. Each time we change
+  directories, I'll ask that you use the 'pwd' and sometimes
+  the 'ls' commands to print the working directory and to
+  list the directory's contents. These are not required when
+  you change directories, but they help us get a sense of
+  where we are at in the filesystem.
 
   Ready?\n"
 
@@ -471,6 +480,8 @@ cdpracticerel() {
     cdup && pwdexec && \
     cdreturn && lsexec)
   sleep 1
+
+  clear
 
   printf "
   Congratulations! You have used relative paths to move
@@ -554,7 +565,7 @@ mvcpintro() {
 
   However, to move and rename it to 'paper.txt.bak', then we
   need to specify the new file name after the target
-  directory's name. The 'mv' command is:
+  directory's name. This 'mv' command is:
 
   mv paper.txt Documents/paper.txt.bak
 
@@ -739,10 +750,10 @@ mvpractice() {
   proceed
 
   printf "
-  Nice job! Now that you have confirmed that the file and
-  directory exist, your first task is to move 'mv' the
-  'paper1.txt' file to your 'homework' directory using the
-  absolute path, like so:
+  Now that you have confirmed that the file and directory
+  exist, your first task is to move 'mv' the 'paper1.txt'
+  file to your 'homework' directory using the absolute path,
+  like so:
 
   mv /home/%s/paper1.txt /home/%s/homework/\n\n" "$USER" "$USER"
 
@@ -940,6 +951,8 @@ dirpractice() {
 
   printf "
   Well done!\n\n"
+
+  proceed
 }
 
 conclusion() {
@@ -960,7 +973,7 @@ conclusion() {
   '/' and ends with the name of your home directory and all
   directories in between, in this case only '/home' is
   listed since that is the only directory between root '/'
-  and your home directory . The absolute path is therefore
+  and your home directory. The absolute path is therefore
   fully specified.\n"
 
   proceed

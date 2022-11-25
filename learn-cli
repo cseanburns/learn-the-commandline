@@ -81,7 +81,7 @@ lssummary() {
   Linux or Unix system, your working directory is usually
   your home directory. On many Linux distributions, your
   home directory is in '/home', but that might differ on
-  macOS (a Unix OS) or ther Unix-like operating systems.\n"
+  macOS (a Unix OS) or other Unix-like operating systems.\n"
 }
 
 ###### The 'pwd' command ######
@@ -274,8 +274,8 @@ cdsummary() {
   'ls', 'pwd', 'mkdir', and 'cd'.
 
   The 'cd' command with an argument or input changed your
-  working directory (if that directory exists) to the one
-  specified in the argument or input. Without an argument or
+  working directory to the one specified in the argument or
+  input (if that directory exists). Without an argument or
   input, the 'cd' command by itself returned you to your
   home directory, which is /home/USER. We confirmed that
   above with the 'pwd' command.\n\n"
@@ -379,8 +379,8 @@ touchsummary() {
   'mkdir', 'cd', 'rmdir', and 'touch'.
 
   The 'touch' command can be used to create new empty files.
-  This command is useful in certain scripting
-  scenarios.\n\n"
+  This command is useful in certain scripting scenarios.
+  \n\n"
 
 }
 
@@ -413,12 +413,12 @@ echoexec() {
 echoredirectinfo() {
   sleep 1
   printf "
-  The 'echo' command prints to standard output, which is the
-  default. However, we can use 'redirection' to send the
-  input to a file, like the 'data.csv' file we created
-  earlier with the 'touch' command. The redirect command is
-  the angle bracket '>'. To print input to the file
-  'data.csv', we use the 'echo' like so:
+  The 'echo' command prints to standard output, which by
+  default is your screen. However, we can use 'redirection'
+  to send the output to a file, like the 'data.csv' file we
+  created earlier with the 'touch' command. The redirect
+  command is the angle bracket '>'. To print input to the
+  file 'data.csv', we use the 'echo' like so:
 
   echo \"hello world\" > data.csv
 
