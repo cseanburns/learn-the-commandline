@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-#set -x
-
-# Date: 2022-11-16
+# Date: 2022-11-25
 
 # A script to practice navigating and using the Linux
 # filesystem
