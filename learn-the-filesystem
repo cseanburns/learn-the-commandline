@@ -1285,6 +1285,19 @@ rmtestdir() {
   fi
 }
 
+cleanup() {
+  if [ -d "$HOME"/homework ] ; then
+    rm -r "$HOME"/homework
+  elif [ -d "$HOME"/test_dir ] ; then
+    rm -r "$HOME"/test_dir
+  elif [ -a "$HOME"/paper1.txt ] ; then
+    rm "$HOME"/paper1.txt
+  else
+    echo "Failed to remove files and directories from script."
+  fi
+}
+trap cleanup EXIT
+
 main() {
   introduction
  
@@ -1313,6 +1326,8 @@ main() {
   dirpractice
  
   conclusion
+
+  cleanup
 }
 
 main

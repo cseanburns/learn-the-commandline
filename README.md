@@ -9,5 +9,3 @@ If using these to learn the command line, start with the
 
 - Need to check that file and directory names used this
   script do not already exist before running the scripts.
-- Need to add a cleanup function in case user exits scripts
-  before completing.
