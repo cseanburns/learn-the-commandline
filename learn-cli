@@ -721,6 +721,21 @@ proceed() {
   clear
 }
 
+cleanup() {
+  if [ -d "$HOME"/homework ] ; then
+    rmdir "$HOME"/homework
+  elif [ -a "$HOME"/data.csv ] ; then
+    rm "$HOME"/data.csv
+  elif [ -a "$HOME"/data.csv.bak ] ; then
+    rm "$HOME"/data.csv.bak
+  elif [ -a "$HOME"/data.old ] ; then
+    rm "$HOME"/data.old
+  else
+    echo "No files to cleanup."
+  fi
+}
+trap cleanup EXIT
+
 main() {
   introduction
 
@@ -797,6 +812,8 @@ main() {
   proceed
 
   conclusion
+
+  cleanup
 }
 
 main
