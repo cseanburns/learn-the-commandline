@@ -12,8 +12,9 @@ set -e
 clear
 
 proceed() {
-  printf "\n"
-  read -rp "Press enter to continue."
+  read -rp "
+Press enter to continue or
+press Ctrl-c (control and the 'c' keys) to exit."
   clear
 }
 
@@ -21,7 +22,12 @@ printf "
 This is flashcard like program to help you remember
 an assortmant of commands.
 
-Press Ctrl-c (control and the 'c' keys) to exit.
+To play:
+
+You will be presented with a question.
+
+To answer, type the name of the command in response
+to the question.
 "
 
 proceed
@@ -32,11 +38,8 @@ main() {
   underline=$(tput smul)
   normal=$(tput sgr0)
   IFS=$','; read -ra card <<<"$(shuf -n 1 "$FILE")"
-  printf "Press Ctrl-c to exit.\n"
   printf "\nQuestion: %s\n" "${card[0]}"
   read -rp "Your answer: " answer
-  printf "\n"
-  printf "The correct answer is: %s\n" "$underline${card[1]}$normal"
   printf "\n"
 }
 
@@ -46,9 +49,13 @@ checkanswer() {
   normal=$(tput sgr0)
   if [ "$answer" = "${card[1]}" ] ; then
     printf "%s" "${green}Correct!${normal}"
+    printf "\n\n"
+    printf "The correct answer is: %s" "$underline${card[1]}$normal"
     printf "\n"
   else
     printf "%s" "${red}Incorrect. Keep trying!${normal}"
+    printf "\n\n"
+    printf "The correct answer is: %s" "$underline${card[1]}$normal"
     printf "\n"
   fi
 }
