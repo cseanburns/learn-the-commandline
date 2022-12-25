@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# modified @nixcasts flashcard script
+# https://www.youtube.com/watch?v=lX8jqo70r1I
+#
+# Date: 2022-12-25
+#
+# Author: Sean Burns <sean.csb@gmail.com>
+
+set -e
+
+clear
+
+proceed() {
+  printf "\n"
+  read -rp "Press enter to continue."
+  clear
+}
+
+printf "
+This is flashcard like program to help you remember
+an assortmant of commands.
+
+Press Ctrl-c (control and the 'c' keys) to exit.
+"
+
+proceed
+
+FILE="cards.csv"
+
+main() {
+  underline=$(tput smul)
+  normal=$(tput sgr0)
+  IFS=$','; read -ra card <<<"$(shuf -n 1 "$FILE")"
+  printf "Press Ctrl-c to exit.\n"
+  printf "\nQuestion: %s\n" "${card[0]}"
+  read -rp "Your answer: " answer
+  printf "\n"
+  printf "The correct answer is: %s\n" "$underline${card[1]}$normal"
+  printf "\n"
+}
+
+checkanswer() {
+  green=$(tput setaf 2)
+  red=$(tput setaf 1)
+  normal=$(tput sgr0)
+  if [ "$answer" = "${card[1]}" ] ; then
+    printf "%s" "${green}Correct!${normal}"
+    printf "\n"
+  else
+    printf "%s" "${red}Incorrect. Keep trying!${normal}"
+    printf "\n"
+  fi
+}
+
+while true; do
+  main
+  checkanswer
+  proceed
+done

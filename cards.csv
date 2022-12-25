@@ -1,0 +1,26 @@
+What command is used to change directories?,cd
+What command is used to make new directories?,mkdir
+What command is used to delete empty directories?,rmdir
+What command is used to delete directories or files?,rm
+What command is used to clear the screen?,clear
+What command is used to examine the top ten lines of a file?,head
+What command is used to print out the current date and time?,date
+What command is used to look at a manual page for a command?,man
+What command is used to show the current directory?,pwd
+What command is used to list files and directories?,ls
+What command is used to create an empty file?,touch
+What command is used to search for a pattern in a text file?,grep
+What command is used to concatenate files?,cat
+What command is used to view and paginate text files?,less
+What command is used to copy files?,cp
+What command is used to move/rename files?,mv
+What command is used to examine the last ten lines of a file?,tail
+What command is used to show real time processes?,top
+What command is used to change file permissions?,chmod
+What command is used to change file ownership?,chown
+What command is used to run commands as the administrator?,sudo
+What command is used to examine your command line history?,history
+What command is used to install and update packages?,apt
+What command is used to examine storage space?,df
+What command is used to examine RAM memory?,free
+What command is used to display a line of text?,echo
