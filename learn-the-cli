@@ -743,14 +743,18 @@ proceed() {
 cleanup() {
   if [ -d "$HOME"/homework ] ; then
     rmdir "$HOME"/homework
-  elif [ -a "$HOME"/data.csv ] ; then
+  fi
+
+  if [ -a "$HOME"/data.csv ] ; then
     rm "$HOME"/data.csv
-  elif [ -a "$HOME"/data.csv.bak ] ; then
+  fi
+
+  if [ -a "$HOME"/data.csv.bak ] ; then
     rm "$HOME"/data.csv.bak
-  elif [ -a "$HOME"/data.old ] ; then
+  fi
+
+  if [ -a "$HOME"/data.old ] ; then
     rm "$HOME"/data.old
-  else
-    true
   fi
 }
 trap cleanup EXIT
