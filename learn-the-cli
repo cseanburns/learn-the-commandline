@@ -831,8 +831,6 @@ main() {
   proceed
 
   conclusion
-
-# cleanup
 }
 
 main
