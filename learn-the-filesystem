@@ -1310,7 +1310,8 @@ cleanup() {
   elif [ -a "$HOME"/paper1.txt ] ; then
     rm "$HOME"/paper1.txt
   else
-    echo "Failed to remove files and directories from script."
+    :
+    #echo "Failed to remove files and directories from script."
   fi
 }
 trap cleanup EXIT
@@ -1343,8 +1344,6 @@ main() {
   dirpractice
  
   conclusion
-
-  cleanup
 }
 
 main
