@@ -1305,13 +1305,12 @@ rmtestdir() {
 cleanup() {
   if [ -d "$HOME"/homework ] ; then
     rm -r "$HOME"/homework
+  elif [ -e "$HOME"/paper1.txt ] ; then
+    rm "$HOME"/paper1.txt
   elif [ -d "$HOME"/test_dir ] ; then
     rm -r "$HOME"/test_dir
-  elif [ -a "$HOME"/paper1.txt ] ; then
-    rm "$HOME"/paper1.txt
   else
-    :
-    #echo "Failed to remove files and directories from script."
+    true
   fi
 }
 trap cleanup EXIT
