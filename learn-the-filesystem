@@ -1304,40 +1304,40 @@ rmtestdir() {
 
 cleanup() {
   if [ -d "$HOME"/homework ] ; then
-    rm -r "$HOME"/homework
-  elif [ -e "$HOME"/paper1.txt ] ; then
-    rm "$HOME"/paper1.txt
-  elif [ -d "$HOME"/test_dir ] ; then
-    rm -r "$HOME"/test_dir
-  else
-    true
+    rmdir "$HOME"/homework
+  fi
+  if [ -a "$HOME"/paper1.txt ] ; then
+    rm "$HOME"/data.csv
+  fi
+  if [ -d "$HOME"/test_dir ] ; then
+    rm "$HOME"/test_dir
   fi
 }
 trap cleanup EXIT
 
 main() {
-  introduction
- 
-  dirtree
- 
-  absolute_paths_intro
- 
-  absolute_paths_summary
- 
-  relative_paths_intro
-
-  relative_paths_summary
-
-  cdpracticeabs
- 
-  cdpracticerel
-
-  mvcpintro
- 
-  rmintro
- 
-  dirintro
- 
+#  introduction
+# 
+#  dirtree
+# 
+#  absolute_paths_intro
+# 
+#  absolute_paths_summary
+# 
+#  relative_paths_intro
+#
+#  relative_paths_summary
+#
+#  cdpracticeabs
+# 
+#  cdpracticerel
+#
+#  mvcpintro
+# 
+#  rmintro
+# 
+#  dirintro
+# 
   mvpractice 
  
   dirpractice
