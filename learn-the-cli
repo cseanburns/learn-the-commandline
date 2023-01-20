@@ -832,7 +832,7 @@ main() {
 
   conclusion
 
-  cleanup
+# cleanup
 }
 
 main
