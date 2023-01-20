@@ -546,7 +546,7 @@ cpexec() {
     eval "${cpinput}"
   else
     echo "Try again."
-    catexec
+    cpexec
   fi
 }
 
@@ -602,7 +602,7 @@ mvexec() {
     eval "${mvinput}"
   else
     echo "Try again."
-    catexec
+    mvexec
   fi
 }
 
