@@ -750,7 +750,8 @@ cleanup() {
   elif [ -a "$HOME"/data.old ] ; then
     rm "$HOME"/data.old
   else
-    echo "Failed to remove files and directories from script."
+    :
+    #echo "Failed to remove files and directories from script."
   fi
 }
 trap cleanup EXIT
