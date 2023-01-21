@@ -32,7 +32,8 @@ to the question.
 
 proceed
 
-FILE="cards.csv"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+FILE="$SCRIPT_DIR/cards.csv"
 
 main() {
   underline=$(tput smul)
