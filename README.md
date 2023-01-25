@@ -42,7 +42,7 @@ Then run the following commands:
 
 ```
 git clone https://github.com/cseanburns/learn-the-commandline.git
-sudo cp learn-the-commandline/* ~/bin
+cp learn-the-commandline/* ~/bin
 ```
 
 To run the programs, type the name of the script.
