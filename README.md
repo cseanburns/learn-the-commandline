@@ -50,7 +50,9 @@ To run the programs, type the name of the script.
 ## TODO
 
 - Need to check that file and directory names used in the
-  learn-the-* scripts do not already exist before running
+  ``learn-the-*`` scripts do not already exist before running
   the scripts.
+- Add ``select`` statements to the ``learn-the-*`` scripts
+  so users can select which modules to learn.
 - Add the cards.csv data to the ``flashcards`` script to
   keep it to one file.
