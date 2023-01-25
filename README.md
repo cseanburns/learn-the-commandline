@@ -32,6 +32,12 @@ to your **~/.bashrc** file using your preferred text editor:
 PATH="$HOME/bin${PATH:+:${PATH}}"; export PATH;
 ```
 
+Create the directory if it does not yet exist:
+
+```
+mkdir ~/bin
+```
+
 Then run the following commands:
 
 ```
