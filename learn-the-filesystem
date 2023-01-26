@@ -1316,28 +1316,28 @@ cleanup() {
 trap cleanup EXIT
 
 main() {
-#  introduction
-# 
-#  dirtree
-# 
-#  absolute_paths_intro
-# 
-#  absolute_paths_summary
-# 
-#  relative_paths_intro
-#
-#  relative_paths_summary
-#
-#  cdpracticeabs
-# 
-#  cdpracticerel
-#
-#  mvcpintro
-# 
-#  rmintro
-# 
-#  dirintro
-# 
+  introduction
+ 
+  dirtree
+ 
+  absolute_paths_intro
+ 
+  absolute_paths_summary
+ 
+  relative_paths_intro
+
+  relative_paths_summary
+
+  cdpracticeabs
+ 
+  cdpracticerel
+
+  mvcpintro
+ 
+  rmintro
+ 
+  dirintro
+ 
   mvpractice 
  
   dirpractice
