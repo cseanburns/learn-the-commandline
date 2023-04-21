@@ -24,3 +24,5 @@ What command is used to install and update packages?,apt
 What command is used to examine storage space?,df
 What command is used to examine RAM memory?,free
 What command is used to display a line of text?,echo
+What command is used to extract a tar archive?,tar
+What command is used to unzip a zip file?,zip
