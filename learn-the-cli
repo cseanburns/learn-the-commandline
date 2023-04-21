@@ -83,7 +83,7 @@ lsintro() {
 lsexec() {
   read -rp "$ " lsinput
   if [ "${lsinput}" = "ls" ] ; then
-    eval "${lsinput}"
+    cd "$HOME" && eval "${lsinput}"
   else
     echo "Try again."
     lsexec
@@ -119,7 +119,7 @@ pwdintro() {
 pwdexec() {
   read -rp "$ " pwdinput
   if [ "${pwdinput}" = "pwd" ] ; then
-    eval "${pwdinput}"
+    cd "$HOME" && eval "${pwdinput}"
   else
     echo "Try again."
     pwdexec
