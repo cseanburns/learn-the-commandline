@@ -119,7 +119,8 @@ pwdintro() {
 pwdexec() {
   read -rp "$ " pwdinput
   if [ "${pwdinput}" = "pwd" ] ; then
-    cd "$HOME" && eval "${pwdinput}"
+    # cd "$HOME" && eval "${pwdinput}"
+    eval "${pwdinput}" && cd "$HOME"
   else
     echo "Try again."
     pwdexec
@@ -243,7 +244,7 @@ cdintro() {
 cdexec() {
   read -rp "$ " cdinput
   if [ "${cdinput}" = "cd homework" ] ; then
-    eval "${cdinput}"
+    cd "$HOME" && eval "${cdinput}"
   else
     echo "Try again."
     cdexec
