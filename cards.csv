@@ -20,9 +20,18 @@ What command is used to change file permissions?,chmod
 What command is used to change file ownership?,chown
 What command is used to run commands as the administrator?,sudo
 What command is used to examine your command line history?,history
-What command is used to install and update packages?,apt
+What command is used to install and update packages on a Debian or Ubuntu distribution?,apt
 What command is used to examine storage space?,df
 What command is used to examine RAM memory?,free
-What command is used to display a line of text?,echo
+What command is used to print text to the screen by default?,echo
 What command is used to extract a tar archive?,tar
-What command is used to unzip a zip file?,zip
+What command is used to unzip a zip file?,unzip
+What command is used to look at a builtin help page?,help
+What command is used to see the group of user?,groups
+What key combination can be used to kill an app or process?,ctrl-c
+What is a basic and user friendly command line text editor?,nano
+What command is used to retrieve a file from the internet?,wget
+What command is used to exit the terminal or the server?,exit
+What command is used to count the words or lines in a file?,wc
+What command is used to sort the lines in a file?,sort
+What command is used to deduplicate sorted lines in a file?,uniq
