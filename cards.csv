@@ -35,3 +35,11 @@ What command is used to exit the terminal or the server?,exit
 What command is used to count the words or lines in a file?,wc
 What command is used to sort the lines in a file?,sort
 What command is used to deduplicate sorted lines in a file?,uniq
+What command is used to change group ownership of files?,chgrp
+What command is used to archive and extract files?,tar
+What command is used to terminate a process by ID or by name?,kill
+What command is used to estimate file and directory sizes?,du
+What command is used to extract sections from each line of files?,cut
+What command is used to create a shortcut to a command?,alias
+What command is used to control the systemd system and service manager?,systemctl
+What command is used to get information about your system's network devices?,ip
