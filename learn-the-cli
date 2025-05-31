@@ -23,7 +23,13 @@
 # <http://www.gnu.org/licenses/>.
 #
 # A script to practice basic shell commands / utilities
-#
+
+trap quit 1 2 3 6
+
+quit() {
+  echo -e "\n\nThanks for playing and learning.\n"
+  exit
+}
 
 introduction() {
 
@@ -120,7 +126,7 @@ pwdexec() {
   read -rp "$ " pwdinput
   if [ "${pwdinput}" = "pwd" ] ; then
     # cd "$HOME" && eval "${pwdinput}"
-    eval "${pwdinput}" && cd "$HOME"
+    eval "${pwdinput}" && cd "$HOME" || exit
   else
     echo "Try again."
     pwdexec

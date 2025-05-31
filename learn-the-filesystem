@@ -24,7 +24,13 @@
 #
 # A script to practice navigating and using the Linux
 # filesystem
-#
+
+trap quit 1 2 3 6
+
+quit() {
+  echo -e "\n\nThanks for playing and learning.\n"
+  exit
+}
 
 introduction() {
 

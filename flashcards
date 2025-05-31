@@ -11,23 +11,27 @@ set -e
 
 clear
 
+trap quit 1 2 3 6
+
+quit() {
+  echo -e "\n\nThanks for playing and learning.\n"
+  exit
+}
+
 proceed() {
   read -rp "
-Press enter to continue or
-press Ctrl-c (control and the 'c' keys) to exit."
+Press enter to continue or press Ctrl-c (control and the 'c' keys) to exit."
   clear
 }
 
 printf "
-This is flashcard like program to help you remember
-an assortmant of commands.
+This is flashcard like program to help you remember an assortmant of commands.
 
 To play:
 
 You will be presented with a question.
 
-To answer, type the name of the command in response
-to the question.
+To answer, type the name of the command in response to the question.
 
 Read more about the commands in their man pages.
 "

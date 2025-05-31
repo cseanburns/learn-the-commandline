@@ -6,6 +6,9 @@ What command is used to clear the screen?,clear
 What command is used to examine the top ten lines of a file?,head
 What command is used to print out the current date and time?,date
 What command is used to look at a manual page for a command?,man
+What command is used to show the location of a command in the file system?,which
+What command is used to shutdown a computer?,shutdown now
+What command is used to reboot a computer?,reboot
 What command is used to show the current directory?,pwd
 What command is used to list files and directories?,ls
 What command is used to create an empty file?,touch
@@ -24,11 +27,10 @@ What command is used to install and update packages on a Debian or Ubuntu distri
 What command is used to examine storage space?,df
 What command is used to examine RAM memory?,free
 What command is used to print text to the screen by default?,echo
-What command is used to extract a tar archive?,tar
 What command is used to unzip a zip file?,unzip
 What command is used to look at a builtin help page?,help
 What command is used to see the group of user?,groups
-What key combination can be used to kill an app or process?,ctrl-c
+What key combination can be used to stop and exit an app or process?,ctrl-c
 What is a basic and user friendly command line text editor?,nano
 What command is used to retrieve a file from the internet?,wget
 What command is used to exit the terminal or the server?,exit
@@ -36,7 +38,9 @@ What command is used to count the words or lines in a file?,wc
 What command is used to sort the lines in a file?,sort
 What command is used to deduplicate sorted lines in a file?,uniq
 What command is used to change group ownership of files?,chgrp
-What command is used to archive and extract files?,tar
+What command is used to archive and extract files ending with 'tar'?,tar
+What command is used to extract files ending with 'zip'?,unzip
+What command is used to zip archive files?,zip
 What command is used to terminate a process by ID or by name?,kill
 What command is used to estimate file and directory sizes?,du
 What command is used to extract sections from each line of files?,cut
