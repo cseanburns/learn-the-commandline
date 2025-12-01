@@ -24,823 +24,890 @@
 #
 # A script to practice basic shell commands / utilities
 
-trap quit 1 2 3 6
+trap quit 1 2 3 6 EXIT
+
+make_workdir() {
+	WORKDIR=$(mktemp -d "$HOME/learn-cli-module-XXXX") || echo "Could not create practice directory" >&2 exit 1
+}
+
+ch_workdir() {
+	cd "$WORKDIR" || exit 1
+}
+
+test_file() {
+	ch_workdir
+	touch new_file.txt || exit 1
+}
 
 quit() {
-  echo -e "\n\nThanks for playing and learning.\n"
-  exit
+	echo -e "\n\nThanks for playing and learning.\n"
+	exit 0
 }
 
 introduction() {
+	clear
 
-  clear
+	cat <<-EOF
 
-  printf "
-  Welcome to Learn the Commandline, the Module Edition.
+	Welcome to Learn the Commandline, the Module Edition.
 
-  The 'learn-the-cli' program helps you learn some of
-  the most used commands (utilities) in the shell.
-  This program lets you practice those same commands
-  but allows you to select or repeat modules to focus
-  on areas that you want to strengthen.
+	This program lets you select or repeat modules to focus on areas that you want to strengthen.
 
-  This program contains four modules:
+	EOF
 
-  1. What Is Here?
+	proceed
 
-    This module focuses on the 'ls' command.
+	cat <<-EOF
 
-  2. Where Am I?
+	This program contains four modules:
 
-    This module focuses on the 'pwd' command.
+	1. What Is Here?
 
-  3. Working with Directories.
+	This module focuses on the 'ls' command.
 
-    This module focuses on the 'mkdir', 'rmdir',
-    and 'cd' commands.
+	2. Where Am I?
 
-  4. Working with Files.
+	This module focuses on the 'pwd' command.
 
-    This module focuses on the 'touch', 'echo',
-    'cat', 'cp', 'mv', and 'rm' commands.
+	3. Working with Directories.
 
-  Instructions: when asked to run a command, type the
-  command and then press the 'Enter' key to run the command.
-  If you make a mistake, this program will let you try
-  again.
+	This module focuses on the 'mkdir', 'rmdir', and 'cd' commands.
 
-  To exit this program while in a module, press the key
-  combo 'Ctrl-c' (that is, the control key plus the 'c'
-  key). Otherwise, press 5 to exit.\n\n\n"
+	4. Working with Files.
 
+	This module focuses on the 'touch', 'echo', 'cat', 'cp', 'mv', and 'rm' commands.
+
+	EOF
+
+	proceed
+
+	cat <<-EOF
+
+	Instructions: when asked to run a command, type the command and then press the 'Enter' key to run the command.
+	If you make a mistake, this program will let you try again.
+
+	To exit this program while in a module, press the key combo 'Ctrl-c' (that is, the control key plus the 'c' key).
+	Otherwise, press 5 to exit.
+
+	EOF
 }
 
 ###### The 'ls' command ######
 
 lsintro() {
-  printf "
-  ##### The 'ls' command #####
+	cat <<-EOF
 
-  Let us get started with the command to list files and
-  directories:
+	##### The 'ls' command #####
 
-  ls\n\n"
+	Let us get started with the command to list files and directories:
 
-  printf "Try running the 'ls' command now:\n\n"
+	ls
+
+	Try running the 'ls' command now:
+
+	EOF
 }
 
 lsexec() {
-  read -rp "$ " lsinput
-  if [ "${lsinput}" = "ls" ] ; then
-    eval "${lsinput}"
-  else
-    echo "Try again."
-    lsexec
-  fi
+	while true; do
+		read -rp "$ " lsinput
+		if [[ "$lsinput" == "ls" ]]; then
+			ch_workdir
+			ls
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 lssummary() {
-  sleep 1.5
-  printf "\n
-  The 'ls' command listed the files and directories in your
-  working directory. The working directory is your current
-  directory. In a graphical user environment, we would say
-  it's the folder that you have opened. When you log in to a
-  Linux or Unix system, your working directory is usually
-  your home directory. On many Linux distributions, your
-  home directory is in '/home', but that might differ on
-  macOS (a Unix OS) or other Unix-like operating systems.\n\n"
-  sleep 1.5
+	sleep 1
+	cat <<-EOF
+
+	The 'ls' command lists the files and directories in your working (or current) directory.
+  
+	In a graphical user environment, we would say the working directory is the folder that you have opened.
+
+	I have taken the liberty of adding a file named 'new_file.txt' to this directory,
+	which you saw after running the 'ls' command.
+  
+	When you log in to a Linux or Unix system, your working directory is usually your home directory.
+	On many Linux distributions, your home directory is in a directory called '/home',
+	but that might differ on macOS (a Unix OS) or other Unix-like operating systems.
+
+	EOF
 }
 
 ###### The 'pwd' command ######
 
 pwdintro() {
-  printf "
-  ##### The 'pwd' command #####
+	cat <<-EOF
 
-  You can always ask for your working directory by using the
-  'pwd' command, which stands for 'print working
-  directory'.\n
+	##### The 'pwd' command #####
 
-  Try running the 'pwd' command now:\n\n"
+	You can always ask for your working directory by using the 'pwd' command, which stands for 'print working directory'
+
+	Try running the 'pwd' command now:
+
+	EOF
 }
 
 pwdexec() {
-  read -rp "$ " pwdinput
-  if [ "${pwdinput}" = "pwd" ] ; then
-    eval "${pwdinput}"
-  else
-    echo "Try again."
-    pwdexec
-  fi
+	while true; do
+		read -rp "$ " pwdinput
+		if [[ "$pwdinput" == "pwd" ]]; then
+			ch_workdir
+			pwd
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 pwdsummary() {
-  sleep 1.5
-  printf "
-  The 'pwd' command listed your working directory. When you
-  first log in to this system, the default location of your
-  working directory is your home directory. All home
-  directories on this system are named after your username
-  and are located in the /home parent directory. Thus, they
-  look like /home/USER, where USER is your username.\n\n"
+	sleep 1
+	cat <<-EOF
 
-  sleep 1.5
+	The 'pwd' command listed the 'path' of your working directory.
 
+	When you first log in to this system, the default location of your working directory is your home directory.
+	Currently, we are working in a temporary directory in your home directory.
+	All home directories on this system are named after your username and are located in the '/home' parent directory.
+	Thus, they look like '/home/USER', where USER is your username.
+
+	The output above should show:
+
+	'/home/USER/learn-cli-module-XXXX'
+
+	where 'USER' is your usernme and 'XXXX' are random letters and numbers.
+
+	EOF
 }
 
 ###### The 'mkdir' command ######
 
 mkdirintro() {
-  printf "
-  ##### The 'mkdir' command #####
+	cat <<-EOF
 
-  We use the 'mkdir' command to create new directories.
+	##### The 'mkdir' command #####
 
-  The 'mkdir' command requires an argument or input.
-  The argument is the name of the directory that we
-  want to create. For example, if we want to create
-  a directory named 'recipes' in our working directory,
-  then we use the 'mkdir' command with the input
-  'recipes' to create that directory.
+	We use the 'mkdir' command to create new directories.
 
-  Please note that the names of files and directories on
-  Linux are case-sensitive. That means that a directory
-  called 'recipes' is different than a directory called
-  'Recipes' or a directory called 'RECIPES'.
+	The 'mkdir' command requires an argument or input.
+	The argument is the name of the directory that we want to create.
+	For example, if we want to create a directory named 'recipes' in our working directory,
+	then we use the 'mkdir' command with the input 'recipes' to create that directory.
 
-  Try running the 'mkdir' command now to create a directory
-  called 'recipes':
+	Please note that the names of files and directories on Linux are case-sensitive.
+	That means that a directory called 'recipes' is different than a directory called 'Recipes' or a directory called 'RECIPES'.
 
-  mkdir recipes\n\n"
+	Try running the 'mkdir' command now to create a directory called 'recipes':
+
+	mkdir recipes
+
+	EOF
 }
 
 mkdirexec() {
-  read -rp "$ " mkdirinput
-  if [ "${mkdirinput}" = "mkdir recipes" ] ; then
-    cd "$HOME" && eval "${mkdirinput}"
-  else
-    echo "Try again."
-    mkdirexec
-  fi
+	while true; do
+		read -rp "$ " mkdirinput
+		if [[ "$mkdirinput" == "mkdir recipes" ]]; then
+			ch_workdir
+			mkdir recipes
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 mkdirsummary() {
-  sleep 1.5
-  printf "
-  The 'mkdir' command created a new directory called
-  'recipes' in your working directory. If your working
-  directory is your home directory, then the location of the
-  new 'recipes' directory is '/home/USER/recipes'. We
-  can check what directory we are with the 'pwd' command and
-  confirm the directory was created with the 'ls' command:
+	sleep 1
+	cat <<-EOF
 
-  Try the 'pwd' command first to confirm your working
-  directory:\n\n"
+	The 'mkdir' command created a new directory called 'recipes' in your working directory.
 
-  pwdexec
+	Try the 'ls' command to confirm that the directory called 'recipes' is listed:
 
-  sleep 1.5
-  printf "
-  Now try the 'ls' command to confirm that the directory
-  called 'recipes' is listed:\n\n"
+	EOF
 
-  lsexec
-  sleep 1.5
+	lsexec
 
-  printf "
-  Great!
+	sleep 1
 
-  You can create other directories with other names just by
-  using different arguments or input for the 'mkdir'
-  command.
+	cat <<-EOF
 
-  In addition to the case-sensitive issue, files and
-  documents should not contain special characters, like
-  spaces or those characters listed on your keyboard above
-  your numbers. Names of files and folders should be one
-  string of text. If they include multiple words, then
-  separate the words with a dash, an underscore, or use
-  camel casing, like so: my-files, my_files, or myFiles.\n"
+	Great!
 
+	You can create other directories with other names just by using different arguments or input for the 'mkdir' command.
+
+	In addition to the case-sensitive issue, files and documents should not contain special characters,
+	like spaces or those characters listed on your keyboard above your numbers.
+	Names of files and folders should be one string of text.
+	If they include multiple words, then separate the words with a dash, an underscore, or use camel casing, like so: my-files, my_files, or myFiles.
+
+	EOF
 }
 
-###### The 'cd' command ######
-
 cdintro() {
-  printf "
-  ##### The 'cd' command #####
+	cat <<-EOF
 
-  The 'cd' command allows us to change to a different
-  directory. Unlike the 'mkdir' command, it does not require
-  an argument or input, but we often add input to specify
-  which directory we would like to go into (or which folder
-  we would like to open). The 'cd' command stands for
-  'change directory'.
+	##### The 'cd' command #####
 
-  Try running the 'cd' command now to change into the new
-  'recipes' directory:
+	The 'cd' command allows us to change to a different directory.
+	Unlike the 'mkdir' command, it does not require an argument or input, but
+	we often add input to specify which directory we would like to go into (or which folder we would like to open).
+	The 'cd' command stands for 'change directory'.
 
-  cd recipes\n\n"
+	Try running the 'cd' command now to change into the new 'recipes' directory:
+
+	cd recipes
+
+	EOF
 }
 
 cdexec() {
-  read -rp "$ " cdinput
-  if [ "${cdinput}" = "cd recipes" ] ; then
-    eval "${cdinput}"
-  else
-    echo "Try again."
-    cdexec
-  fi
+	while true; do
+		read -rp "$ " cdinput
+		if [[ "$cdinput" == "cd recipes" ]]; then
+			ch_workdir
+			cd recipes || exit 1
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 cdrecipes() {
-  sleep 1.5
-  printf "
-  The 'cd' command opened your new 'recipes' directory. If
-  you use the 'pwd' command, you will see that that your
-  location has changed to '/home/USER/recipes'. Try that
-  now:\n\n"
+	cat <<-EOF
 
-  (cd "$HOME"/recipes && pwdexec)
+	The 'cd' command opened your new 'recipes' directory.
+	If you use the 'pwd' command, you will see that that your location has changed to '/home/USER/learn-cli-module-XXXX/recipes'.
+	
+	Try that now:
+
+	EOF
+
+	while true; do
+		read -rp "$ " pwd_recipes
+		if [[ "$pwd_recipes" == "pwd" ]]; then
+			pwd
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 cdhome() {
-  sleep 1.5
-  printf "
-  Now let's return to (or open) your home folder. Here is
-  where the 'cd' command does not require an argument or
-  input. That is, if you type 'cd' by itself, it'll take you
-  home.
+	sleep 1
+	cat <<-EOF
 
-  Try typing 'cd' by itself now:\n\n"
+	Now let's return to (or open) your home folder.
+	Here is where the 'cd' command does not require an argument or input. That is, if you type 'cd' by itself, it'll take you home.
 
-  read -rp "$ " cdhome
-  if [ "${cdhome}" = "cd" ] ; then
-    eval "${cdhome}"
-  else
-    echo "Try again."
-    cdhome
-  fi
+	However, since we are working in a temporary directory, when we type the 'cd' command, it'll take us to that base directory.
+	Normally, 'cd' takes us HOME!
 
-  sleep 1.5
-  printf "
-  Again, use the 'pwd' command to confirm that you are in
-  your home directory, which is '/home/USER':\n\n"
+	Try typing 'cd' by itself now:
 
-  pwdexec
+	EOF
+
+	while true; do
+		read -rp "$ " cdhome
+		if [[ "$cdhome" == "cd" ]]; then
+			ch_workdir
+			break
+		else
+			echo "Try again."
+		fi
+	done
+
+	sleep 1
+	cat <<-EOF
+
+	Again, use the 'pwd' command to confirm that you are in your home directory, which is '/home/USER/learn-cli-module-XXXX':
+
+	EOF
+
+	pwdexec
 }
 
 cdsummary() {
-  sleep 1.5
-  printf "
-  Very good!
+	sleep 1
+	cat <<-EOF
 
-  The 'cd' command with an argument or input changed your
-  working directory to the one specified in the argument or
-  input (if that directory exists). Without an argument or
-  input, the 'cd' command by itself returned you to your
-  home directory, which is /home/USER. We confirmed that
-  above with the 'pwd' command.\n\n"
+	Very good!
+
+	The 'cd' command with an argument or input changed your working directory to the one specified in the argument or input (if that directory exists).
+	Without an argument or input, the 'cd' command by itself returned you to your home directory, which is '/home/USER'.
+	We confirmed that above with the 'pwd' command.
+
+	EOF
 
 }
 
 ###### The 'rmdir' command ######
 
 rmdirintro() {
-  printf "
-  ##### The 'rmdir' command #####
+	cat <<-EOF
 
-  In the prior section, you learned how to create a new
-  directory called 'recipes'. To remove that directory, we
-  use the 'rmdir' command. The 'rmdir' command will only
-  remove empty directories. If a directory has other
-  directories or files in it, then we will have to use
-  another command. More on that later.
+	##### The 'rmdir' command #####
 
-  Like the 'mkdir' command, the 'rmdir' command requires an
-  argument or input. The argument is the name of the
-  directory that we want to remove. For example, if we want
-  to remove the empty directory named 'recipes' in our
-  working directory, then we use the 'rmdir' command like
-  so:
+	In the prior section, you learned how to create a new directory called 'recipes'.
+	To remove that directory, we use the 'rmdir' command. The 'rmdir' command will only remove empty directories.
+	If a directory has other directories or files in it, then we will have to use another command.
+	More on that later.
 
-  rmdir recipes 
+	Like the 'mkdir' command, the 'rmdir' command requires an argument or input.
+	The argument is the name of the directory that we want to remove.
+	For example, if we want to remove the empty directory named 'recipes' in our working directory, then
+	we use the 'rmdir' command like so:
 
-  Try running the 'rmdir' command now to remove the directory
-  called 'recipes':\n\n"
+	rmdir recipes
+
+	Try running the 'rmdir' command now to remove the directory called 'recipes':
+
+	EOF
 }
 
 rmdirexec() {
-  read -rp "$ " rmdirinput
-  if [ "${rmdirinput}" = "rmdir recipes" ] ; then
-    eval "${rmdirinput}"
-  else
-    echo "Try again."
-    rmdirexec
-  fi
+	while true; do
+		read -rp "$ " rmdirinput
+		if [[ "${rmdirinput}" == "rmdir recipes" ]] ; then
+			ch_workdir
+			rmdir recipes
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 rmdirsummary() {
-  sleep 1.5
-  printf "
+	sleep 1
+	cat <<-EOF
 
-  The 'rmdir' command removed the empty directory called
-  'recipes' in your working directory. We can check that
-  with the 'ls' command.
+	The 'rmdir' command removed the empty directory called 'recipes' in your working directory.
+	We can check that with the 'ls' command.
 
-  Try the 'ls' command to confirm that the directory called
-  'recipes' is no longer listed:\n\n"
+	Try the 'ls' command to confirm that the directory called 'recipes' is no longer listed:
 
-  lsexec
-  sleep 1.5
+	EOF
 
-  printf "
-  Very good!\n\n"
+	lsexec
 
+	cat <<-EOF
+
+	Very good!
+
+	EOF
 }
 
 ###### The 'touch' command ######
 
 touchintro() {
-  printf "
-  ##### The 'touch' command #####
+	cat <<-EOF
 
-  The 'touch' command is technically used to change a file's
-  access and modification timestamp. However, it has this
-  nice side effect of creating a new, empty file when its
-  input is a new file name. The following 'touch' command
-  with 'brownies.txt' as an argument creates an empty file
-  called 'brownies.txt'.
+	##### The 'touch' command #####
 
-  touch brownies.txt\n\n"
+	The 'touch' command is technically used to change a file's access and modification timestamp.
+	However, it has this nice side effect of creating a new, empty file when its input is a new file name.
+	The following 'touch' command with 'brownies.txt' as an argument creates an empty file called 'brownies.txt'.
 
-  printf "Try running the above 'touch' command now:\n\n"
+	touch brownies.txt
+
+	Try running the above 'touch' command now:
+
+	EOF
 }
 
 touchexec() {
-  cd "$HOME" || exit
-  read -rp "$ " touchinput
-  if [ "${touchinput}" = "touch brownies.txt" ] ; then
-    eval "${touchinput}"
-  else
-    echo "Try again."
-    touchexec
-  fi
+	while true; do
+		read -rp "$ " touchinput
+		if [[ "$touchinput" == "touch brownies.txt" ]]; then
+			ch_workdir
+			touch brownies.txt
+			break
+		else
+			echo "Try again."
+		fi
+	done
 
-  sleep 1.5
+	cat <<-EOF
 
-  printf "
-  Now use the 'ls' command to check that the file now
-  exists.\n"
+	Now use the 'ls' command to check that the file now exists.
 
-  lsexec
+	EOF
+
+	lsexec
 }
 
 touchsummary() {
-  sleep 1.5
-  printf "
-  Very good!
+	sleep 1
+	cat <<-EOF
 
-  The 'touch' command can be used to create new empty files.
-  This command is useful in certain scripting scenarios.
-  \n\n"
+	Very good!
 
+	The 'touch' command can be used to create new empty files.
+	This command is useful in certain scripting scenarios.
+
+	EOF
 }
 
 ###### The 'echo' command ######
 
 echointro() {
-  printf "
-  ##### The 'echo' command #####
+	cat <<-EOF
 
-  The 'echo' command displays a line of text, or prints text
-  to standard output. It's a simple command and is useful in
-  a variety of contexts. To display the line '1c flour', we
-  use the 'echo' command like this:
+	##### The 'echo' command #####
 
-  echo \"1c flour\"\n\n"
+	The 'echo' command displays a line of text, or prints text to standard output.
+	It's a simple command and is useful in a variety of contexts.
+	To display the line '1c flour', we use the 'echo' command like this:
 
-  printf "Try running the above 'echo' command now:\n\n"
+	echo "1c flour"
+
+	Try running the above 'echo' command now:
+
+	EOF
 }
 
 echoexec() {
-  cd "$HOME" || exit
-  read -rp "$ " echoinput
-  if [ "${echoinput}" = 'echo "1c flour"' ] ; then
-    eval "${echoinput}"
-  else
-    echo "Try again."
-    echoexec
-  fi
+	while true; do
+		read -rp "$ " echoinput
+		if [[ "$echoinput" == 'echo "1c flour"' ]]; then
+			ch_workdir
+			echo "1c flour"
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 echoredirectinfo() {
-  sleep 1.5
-  printf "
-  The 'echo' command prints to standard output, which by
-  default is your screen. However, we can use 'redirection'
-  to send the output to a file, like the 'brownies.txt' file we
-  created earlier with the 'touch' command. The redirect
-  command is the angle bracket '>'. To print input to the
-  file 'brownies.txt', we use the 'echo' like so:
+	sleep 1
+	cat <<-EOF
 
-  echo \"1c flour\" > brownies.txt
+	The 'echo' command prints to standard output, which by default is your screen.
+	However, we can use 'redirection' to send the output to a file, like the 'brownies.txt' file.
+	The redirect command is the angle bracket '>'.
+	To print input to the file 'brownies.txt', we use the 'echo' like so:
 
-  Now you try it:\n"
+	echo "1c flour" > brownies.txt
+
+	Now you try it:
+
+	EOF
 }
 
 echoredirect() {
-  cd "$HOME" || exit
-  read -rp "$ " echofile
-  if [ "${echofile}" = 'echo "1c flour" > brownies.txt' ] ; then
-    eval "${echofile}"
-  else
-    echo "Try again."
-    echoredirect
-  fi
+	while true; do
+		read -rp "$ " echofile
+		if [[ "$echofile" == 'echo "1c flour" > brownies.txt' ]]; then
+			ch_workdir
+			echo "1c flour" > brownies.txt
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 echosummary() {
-  sleep 1.5
-  printf "
-  Very good!
+	sleep 1
+	cat <<-EOF
 
-  The 'echo' command can be used to create text. It is
-  useful in scripts to report the status of some command.
-  Using the redirect command '>', output can be sent to a
-  file.\n\n"
+	Very good!
+
+	The 'echo' command can be used to create text.
+	It is useful in scripts to report the status of some command.
+	Using the redirect command '>', output can be sent to a file.
+
+	EOF
 }
 
-###### The 'cat' command' ######
-
 catintro() {
-  printf "
-  ##### The 'cat' command #####
+	cat <<-EOF
 
-  The 'cat' command performs a couple of useful functions.
-  Specifically, it 1) displays the contents of a file, and
-  2) concatenates multiple files. Like the 'mkdir', 'rmdir',
-  'echo', and other commands, the 'cat' command requires an
-  argument or input. The input is usually at least one file
-  name. If the input is more than one file name, the 'cat'
-  command will display the contents of all the files. With
-  redirection, the 'cat' command can be used to redirect the
-  output of multiple files into a new file, thereby
-  appending, or 'concatenating', files together.
+	##### The 'cat' command #####
 
-  For example, to 'cat' a single file, the command is:
+	The 'cat' command performs a couple of useful functions.
+	Specifically, it:
+	
+	1) displays the contents of a file, and
 
-  cat brownies.txt
+	2) concatenates (joins or combines) the content of multiple files.
+	
+	Like the 'mkdir', 'rmdir', 'echo', and other commands, the 'cat' command requires an argument or input.
+	The input is usually at least one file name.
+	If the input is more than one file name, the 'cat' command will display the contents of all the files.
+	With redirection, the 'cat' command can be used to redirect the output of multiple files into a new file, thereby
+	appending, or 'concatenating', files together.
 
-  Try running the above 'cat' command now:\n\n"
+	For example, to 'cat' a single file, the command is:
+
+	cat brownies.txt
+
+	Try running the above 'cat' command now:
+
+	EOF
 }
 
 catexec() {
-  cd "$HOME" || exit
-  read -rp "$ " catinput
-  if [ "${catinput}" = "cat brownies.txt" ] ; then
-    eval "${catinput}"
-  else
-    echo "Try again."
-    catexec
-  fi
+	while true; do
+		read -rp "$ " catinput
+		if [[ "$catinput" == "cat brownies.txt" ]]; then
+			ch_workdir
+			cat brownies.txt
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 catsummary() {
-  sleep 1.5
-  printf "
-  The 'cat' command displayed the content of the 'brownies.txt'
-  file. We could also use redirection, like we did with the
-  'echo' command, to redirect the output of multiple files
-  into a single file. For example, the command:
+	sleep 1
+	cat <<-EOF
 
-  cat file1.txt file2.txt > file3.txt
+	The 'cat' command displayed the content of the 'brownies.txt' file.
+	We could also use redirection, like we did with the 'echo' command, to redirect the output of multiple files into a single file.
+	For example, the command:
 
-  would output the contents of file1.txt and file2.txt into
-  file3.txt. If file3.txt did not exist, it would be
-  created.\n\n"
+	cat file1.txt file2.txt > file3.txt
+
+	would output the contents of file1.txt and file2.txt into file3.txt.
+	If file3.txt did not exist, it would be created.
+	If file3.txt existed, this command would overwrite it with the new content.
+
+	EOF
 }
 
-###### The 'cp' command ######
-
 cpintro() {
-  printf "
-  ##### The 'cp' command #####
+	cat <<-EOF
 
-  The 'cp' command copies files and directories. It
-  generally takes two arguments, or two inputs: the name of
-  the file or directory to copy and the name of the copy.
-  For example, to copy the 'brownies.txt' file to a file named
-  'brownies.txt.bak', the command is:
+	##### The 'cp' command #####
 
-  cp brownies.txt brownies.txt.bak
+	The 'cp' command copies files and directories.
+	It generally takes two arguments, or two inputs: the name of the file or directory to copy and the name of the copy.
+	For example, to copy the 'brownies.txt' file to a file named 'brownies.txt.bak', the command is:
 
-  Thus, the first argument is the name of the original file
-  and the second argument is the name of the copy.
+	cp brownies.txt brownies.txt.bak
 
-  Now try the above 'cp' command:\n"
+	Thus, the first argument is the name of the original file and the second argument is the name of the copy.
+
+	Now try the above 'cp' command:
+
+	EOF
 }
 
 cpexec() {
-  cd "$HOME" || exit
-  read -rp "$ " cpinput
-  if [ "${cpinput}" = "cp brownies.txt brownies.txt.bak" ] ; then
-    eval "${cpinput}"
-  else
-    echo "Try again."
-    cpexec
-  fi
+	while true; do
+		read -rp "$ " cpinput
+		if [[ "$cpinput" == "cp brownies.txt brownies.txt.bak" ]]; then
+			ch_workdir
+			cp brownies.txt brownies.txt.bak
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 cpsummary() {
-  sleep 1.5
-  printf "
-  You can check if the copy was successful with the 'ls'
-  command. Give it a try:\n"
+	sleep 1
+	cat <<-EOF
 
-  lsexec
-  sleep 1.5
+	You can check if the copy was successful with the 'ls' command.
+	Give it a try:
 
-  printf "
-  Very good!
+	EOF
 
-  Note that the new copy can be used to rename the file
-  while keeping the original file in place. There is also a
-  command that will rename or move a file. We cover that
-  next.\n\n"
+	lsexec
 
+	cat <<-EOF
+
+	Very good!
+
+	Note that the new copy can be used to rename the file while keeping the original file in place.
+	There is also a command that will rename or move a file.
+	We cover that next.
+
+	EOF
 }
 
-###### The 'mv' command ######
-
 mvintro() {
-  printf "
-  ##### The 'mv' command #####
+	cat <<-EOF
 
-  The 'mv' command moves files and directories. Moving is
-  another way of renaming files or directories. Like the
-  'cp' command, it generally takes two arguments, or two
-  inputs: the name of the file or directory to move or
-  rename and the new name or location of the file. Unlike
-  the 'cp' command, the original file will no longer exist.
-  The renamed file will take its place. For example, to move
-  or rename the 'brownies.txt' file to a file named 'brownies.old',
-  the command is:
+	##### The 'mv' command #####
 
-  mv brownies.txt brownies.old
+	The 'mv' command moves files and directories.
+	Moving is another way of renaming files or directories.
+	Like the 'cp' command, it generally takes two arguments, or two inputs:
+	the name of the file or directory to move or rename and the new name or location of the file.
+	Unlike the 'cp' command, the original file will no longer exist.
+	The renamed file will take its place.
+	For example, to move or rename the 'brownies.txt' file to a file named 'brownies.old', the command is:
 
-  Thus, the first argument is the name of the original file
-  and the second argument is the new name of the same
-  file.
+	mv brownies.txt brownies.old
 
-  Now try the above command:\n"
+	Thus, the first argument is the name of the original file and the second argument is the new name of the same file.
+
+	Now try the above command:
+
+	EOF
 }
 
 mvexec() {
-  cd "$HOME" || exit
-  read -rp "$ " mvinput
-  if [ "${mvinput}" = "mv brownies.txt brownies.old" ] ; then
-    eval "${mvinput}"
-  else
-    echo "Try again."
-    mvexec
-  fi
+	while true; do
+		read -rp "$ " mvinput
+		if [[ "$mvinput" == "mv brownies.txt brownies.old" ]]; then
+			ch_workdir
+			mv brownies.txt brownies.old
+			break
+		else
+			echo "Try again."
+		fi
+	done
 }
 
 mvsummary() {
-  sleep 1.5
-  printf "
-  You can check if the 'mv' command worked with the 'ls'
-  command. Give it a try:\n"
+	sleep 1
+	cat <<-EOF
 
-  lsexec
-  sleep 1.5
+	You can check if the 'mv' command worked with the 'ls' command.
+	Give it a try:
 
-  printf "
-  Very good! Unlike the 'cp' command, the 'mv'
-  command does not keep a copy of the original
-  file.\n\n"
+	EOF
 
+	lsexec
+
+	cat <<-EOF
+
+	Very good!
+
+	Unlike the 'cp' command, the 'mv' command does not keep a copy of the original file.
+
+	EOF
 }
 
 ###### The 'rm' command ######
 
 rmintro() {
-  printf "
-  ##### The 'rm' command #####
+	cat <<-EOF
 
-  The 'rm' command, short for remove, deletes files and
-  directories. You will remember that the 'rmdir' command
-  deletes empty directories. We need the 'rm' command to
-  delete directories that contain files and sub-directories.
-  The 'rm' command does not provide a trash bin for
-  recovering deleted files. Once something is deleted with
-  'rm', consider it gone for good.
+	##### The 'rm' command #####
 
-  The 'rm' command also takes arguments or input. It can
-  even take multiple arguments. Try running the 'rm' command
-  to delete the brownies.txt.bak and the brownies.old files we just
-  created:\n
+	The 'rm' command, short for remove, deletes files and directories.
+	You will remember that the 'rmdir' command deletes empty directories.
+	We need the 'rm' command to delete directories that contain files and sub-directories.
+	The 'rm' command does not provide a trash bin for recovering deleted files.
+	Once something is deleted with 'rm', consider it gone for good.
 
-  rm brownies.txt.bak brownies.old\n\n"
+	The 'rm' command also takes arguments or input.
+	It can even take multiple arguments.
+	Try running the 'rm' command to delete the brownies.txt.bak and the brownies.old files we just created:
 
+	rm brownies.txt.bak brownies.old
+
+	EOF
 }
 
 rmexec() {
-  cd "$HOME" || exit
-  read -rp "$ " rminput
-  if [ "${rminput}" = "rm brownies.txt.bak brownies.old" ] ; then
-    eval "${rminput}"
-  else
-    echo "Try again."
-    rmexec
-  fi
+	while true; do
+		read -rp "$ " rminput
+		if [[ "$rminput" == "rm brownies.txt.bak brownies.old" ]]; then
+			ch_workdir
+			rm brownies.txt.bak brownies.old
+			break
+		else
+			echo "Try again."
+		fi
+	done
 } 
 
 rmsummary() {
-  sleep 1.5
-  printf "
-  You can check if the 'rm' command worked with the 'ls'
-  command. Give it a try:\n"
+	sleep 1
+	cat <<-EOF
 
-  lsexec
-  sleep 1.5
+	You can check if the 'rm' command worked with the 'ls' command.
+	Give it a try:
 
-  printf "
-  Remember, you should assume that the 'rm' command
-  permanently deletes files and directories.\n\n"
+	EOF
+
+	lsexec
+
+	cat <<-EOF
+
+	Remember, you should assume that the 'rm' command permanently deletes files and directories.
+
+	EOF
 }
 
 conclusion() {
-  printf "
-  Well done!
+	sleep 1
 
-  You have completed:
+	cat <<-EOF
 
-  Learn the Commandline, the Module Edition!
+	Well done!
 
-  Run this program again until you get the hang of
-  what the commands do and have acquired a good
-  understanding of them.\n\n"
+	You have completed:
+
+	Learn the Commandline, the Module Edition!
+
+	Run this program again until you get the hang of what the commands do and have acquired a good understanding of them.
+
+	EOF
 }
 
 proceed() {
-  printf "\n"
-  read -rp "Press enter to continue."
+  read -rp "Press Enter to continue."
   clear
 }
 
 cleanup() {
-  if [ -d "$HOME"/recipes ] ; then
-    rmdir "$HOME"/recipes
-  fi
-
-  if [ -a "$HOME"/brownies.txt ] ; then
-    rm "$HOME"/brownies.txt
-  fi
-
-  if [ -a "$HOME"/brownies.txt.bak ] ; then
-    rm "$HOME"/brownies.txt.bak
-  fi
-
-  if [ -a "$HOME"/brownies.old ] ; then
-    rm "$HOME"/brownies.old
-  fi
+	rm -rf -- "$WORKDIR"
 }
+
 trap cleanup EXIT
 
 ls_module() {
-  lsintro
-  lsexec
-  lssummary
+	lsintro
+	lsexec
+	lssummary
 }
 
 pwd_module() {
-  pwdintro
-  pwdexec
-  pwdsummary
+	pwdintro
+	pwdexec
+	pwdsummary
 }
 
 mkdir_module() {
-  mkdirintro
-  mkdirexec
-  mkdirsummary
+	mkdirintro
+	mkdirexec
+	mkdirsummary
 }
 
 cd_module() {
-  cdintro
-  cdexec
-  cdrecipes
-  cdhome
-  cdsummary
+	cdintro
+	cdexec
+	cdrecipes
+	cdhome
+	cdsummary
 }
 
 rmdir_module() {
-  rmdirintro
-  rmdirexec
-  rmdirsummary
+	rmdirintro
+	rmdirexec
+	rmdirsummary
 }
 
 touch_module() {
-  touchintro
-  touchexec
-  touchsummary
+	touchintro
+	touchexec
+	touchsummary
 }
 
 echo_module() {
-  echointro
-  echoexec
-  echoredirectinfo
-  echoredirect
-  echosummary
+	echointro
+	echoexec
+	echoredirectinfo
+	echoredirect
+	echosummary
 }
 
 cat_module() {
-  catintro
-  catexec
-  catsummary
+	catintro
+	catexec
+	catsummary
 }
 
 cp_module() {
-  cpintro
-  cpexec
-  cpsummary
+	cpintro
+	cpexec
+	cpsummary
 }
 
 mv_module() {
-  mvintro
-  mvexec
-  mvsummary
+	mvintro
+	mvexec
+	mvsummary
 }
 
 rm_module() {
-  rmintro
-  rmexec
-  rmsummary
+	rmintro
+	rmexec
+	rmsummary
 }
 
 PS3=$'\n'"Select the module you would like to practice. "$'\n'"Enter # : "
 
 select_module() {
-  while true; do
-    select modules in "What Is Here" "Where Am I" "Working with Directories" "Working with Files" Exit; do
-    clear
-      case "$modules" in
-        "What Is Here")
-          clear
-          ls_module
-          proceed
-          break
-          ;;
-        "Where Am I")
-          clear
-          pwd_module
-          proceed
-          break
-          ;;
-        "Working with Directories")
-          clear
-          mkdir_module
-          proceed
-          cd_module
-          proceed
-          rmdir_module
-          proceed
-          break
-          ;;
-        "Working with Files")
-          clear
-          touch_module
-          proceed
-          echo_module
-          proceed
-          cat_module
-          proceed
-          cp_module
-          proceed
-          mv_module
-          proceed
-          rm_module
-          break
-          ;;
-        Exit)
-          break 2
-          ;;
-        *)
-        echo "Invalid option $REPLY"
-        ;;
-      esac
-    done
-done
+	while true; do
+		select modules in "What Is Here" "Where Am I" "Working with Directories" "Working with Files" Exit; do
+			clear
+			case "$modules" in
+				"What Is Here")
+					clear
+					ls_module
+					proceed
+					break
+					;;
+				"Where Am I")
+					clear
+					pwd_module
+					proceed
+					break
+					;;
+				"Working with Directories")
+					clear
+					mkdir_module
+					proceed
+					cd_module
+					proceed
+					rmdir_module
+					proceed
+					break
+					;;
+				"Working with Files")
+					clear
+					touch_module
+					proceed
+					echo_module
+					proceed
+					cat_module
+					proceed
+					cp_module
+					proceed
+					mv_module
+					proceed
+					rm_module
+					break
+					;;
+				Exit)
+					break 2
+					;;
+				*)
+					echo "Invalid option $REPLY"
+					;;
+			esac
+		done
+	done
 }
 
 main() {
-  introduction
-  select_module
-  clear
-  conclusion
+	make_workdir
+	test_file
+	introduction
+	select_module
+	clear
+	conclusion
 }
 
 main
