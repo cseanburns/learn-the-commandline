@@ -14,17 +14,17 @@ clear
 trap quit 1 2 3 6
 
 quit() {
-  echo -e "\n\nThanks for playing and learning.\n"
-  exit
+	echo -e "\n\nThanks for playing and learning.\n"
+	exit
 }
 
 proceed() {
-  read -rp "
-Press enter to continue or press Ctrl-c (control and the 'c' keys) to exit."
-  clear
+	read -rp "Press enter to continue or press Ctrl-c (control and the 'c' keys) to exit."
+	clear
 }
 
-printf "
+cat <<-EOF
+
 This is flashcard like program to help you remember an assortmant of commands.
 
 To play:
@@ -34,7 +34,8 @@ You will be presented with a question.
 To answer, type the name of the command in response to the question.
 
 Read more about the commands in their man pages.
-"
+
+EOF
 
 proceed
 
@@ -44,33 +45,33 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 FILE="$SCRIPT_DIR/cards.csv"
 
 main() {
-  underline=$(tput smul)
-  normal=$(tput sgr0)
-  IFS=$','; read -ra card <<<"$(shuf -n 1 "$FILE")"
-  printf "\nQuestion: %s\n" "${card[0]}"
-  read -rp "Your answer: " answer
-  printf "\n"
+	# underline=$(tput smul)
+	# normal=$(tput sgr0)
+	IFS=$','; read -ra card <<<"$(shuf -n 1 "$FILE")"
+	printf "\nQuestion: %s\n" "${card[0]}"
+	read -rp "Your answer: " answer
+	printf "\n"
 }
 
 checkanswer() {
-  green=$(tput setaf 2)
-  red=$(tput setaf 1)
-  normal=$(tput sgr0)
-  if [ "$answer" = "${card[1]}" ] ; then
-    printf "%s" "${green}Correct!${normal}"
-    printf "\n\n"
-    printf "The correct answer is: %s" "$underline${card[1]}$normal"
-    printf "\n"
-  else
-    printf "%s" "${red}Incorrect. Keep trying!${normal}"
-    printf "\n\n"
-    printf "The correct answer is: %s" "$underline${card[1]}$normal"
-    printf "\n"
-  fi
+	green=$(tput setaf 2)
+	red=$(tput setaf 1)
+	normal=$(tput sgr0)
+	if [ "$answer" = "${card[1]}" ] ; then
+		printf "%s" "${green}Correct!${normal}"
+		printf "\n\n"
+		printf "The correct answer is: %s" "$underline${card[1]}$normal"
+		printf "\n\n"
+	else
+		printf "%s" "${red}Incorrect. Keep trying!${normal}"
+		printf "\n\n"
+		printf "The correct answer is: %s" "$underline${card[1]}$normal"
+		printf "\n"
+	fi
 }
 
 while true; do
-  main
-  checkanswer
-  proceed
+	main
+	checkanswer
+	proceed
 done
